@@ -1,0 +1,162 @@
+{% load url from future %}
+{% load compress staticfiles bootstrap activelink %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{% block title %}Open Source Prospector{% endblock %}</title>
+
+    <!-- CSS -->
+    {% block uncompressed_css %}
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+            rel="stylesheet">
+    {% endblock uncompressed_css %}
+    {% compress css %}
+      {# Allow this to be overridden, because this pulls in bootstrap #}
+      {% block css %}
+        <link rel="stylesheet" type="text/less"
+              href="{% static 'css/common.less' %}" />
+      {% endblock css %}
+    {% endcompress %}
+
+    <!-- JS -->
+    {% block uncompressed_js %}
+      <script type="text/javascript"
+              src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+      </script>
+    {% endblock uncompressed_js %}
+    {% compress js %}
+      <script type="text/javascript"
+              src="{% static 'js/bootstrap/bootstrap.js' %}" >
+      </script>
+      <script type="text/javascript"
+              src="{% static 'js/feedback.js' %}" >
+      </script>
+      {% block js %}{% endblock js %}
+    {% endcompress %}
+
+    {% block head_matter %}{% endblock %}
+  </head>
+  <body>
+    <header class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="row">
+          <a href="{% url 'hmeter_frontend:project:index' %}"
+             class="navbar-brand col-sm-10">
+             <img id="redhat-logo" src="{% static 'redhat-logo.png' %}" />
+             <span>Prospector</span>
+          </a>
+
+          <button class="navbar-toggle col-sm-2 collapsed" type="button"
+                  data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav">
+            <li {% ifactive 'hmeter_frontend:project:index' %}
+                  class="active"
+                {% else %}
+                  {% ifactive 'hmeter_frontend:business_units' %}
+                    class="active"
+                  {% else %}
+                    {% ifactive 'hmeter_frontend:all_projects' %}
+                      class="active"
+                    {% endifactive %}
+                  {% endifactive %}
+                {% endifactive %}>
+              <a href="#" class="dropdown-toggle"
+                 data-toggle="dropdown">
+                 Projects <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li {% ifactive 'hmeter_frontend:project:index' %}
+                    class="active"
+                    {% endifactive %}>
+                  <a href="{% url 'hmeter_frontend:project:index' %}">
+                    Monitored projects</a>
+                </li>
+                <li {% ifactive 'hmeter_frontend:business_units' %}
+                    class="active"
+                    {% endifactive %}>
+                  <a href="{% url 'hmeter_frontend:business_units' %}">
+                    By business units</a>
+                </li>
+                <li {% ifactive 'hmeter_frontend:all_projects' %}
+                    class="active"
+                  {% endifactive %}>
+                  <a href="{% url 'hmeter_frontend:all_projects' %}">
+                    All projects
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li {% ifactive 'hmeter_frontend:about' %}
+                class="active" {% endifactive %}>
+              <a href="{% url 'hmeter_frontend:about' %}">About</a>
+            </li>
+            <li
+               {% ifactive 'hmeter_frontend:contact' %}
+               class="active"{% endifactive %}>
+               <a href="{% url 'hmeter_frontend:contact' %}">Contact</a>
+            </li>
+            <li><a id="feedback-button" href="#" data-toggle="modal"
+                   data-target="#feedback-modal">Leave feedback</a></li>
+          </ul>
+
+          <form class="navbar-form navbar-right" action="{% url 'admin:index' %}"
+                id="admin-link">
+            <button type="submit" class="btn btn-link">
+              Administrator Login
+            </button>
+          </form>
+        </nav>
+      </div>
+    </header>
+
+    <div id="feedback-modal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4>Feedback form</h4>
+          </div>
+
+          <form class="modal-body form-horizontal" id="feedback-form"
+                method="post" role="form"
+                action="{% url 'hmeter_frontend:feedback' %}">
+                {% csrf_token %}
+                {{ feedback_form|bootstrap }}
+          </form>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-spinner fa-spin"></i>
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% block main %}
+    <main role="main" class="container clearfix">
+      {% block content %}
+      {% endblock %}
+    </main>
+    {% endblock main %}
+  </body>
+</html>

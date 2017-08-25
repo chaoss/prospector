@@ -1,0 +1,303 @@
+{% extends "hmeter_frontend/base.html" %}
+{% load cachebuster humanize recurse metrics includeor jsonify %}
+{% load url from future %}
+
+{% block title %}Open Source Prospector: {{ project.name }}{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'jquery-treeview/jquery.treeview.css' %}" />
+  <link rel="stylesheet" type="text/less"
+        href="{% static 'css/project-detail.less' %}" />
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'css/bootstrap-slider.css' %}" />
+{% endblock css %}
+
+{% block uncompressed_js %}
+  {{ block.super }}
+  <script type="text/javascript"
+          src="{% url 'js_reverse' %}">
+  </script>
+  <script type="text/javascript">
+    var project_id = {{ project.id }};
+    var metric_constants = {{ metric_score_constants|safe }};
+    var hldomain = {{ hldomain|jsonify }};
+    var hlcolor = "#D62424";
+
+    var domready_deferred = $.Deferred ();
+    var graphready_deferred = $.Deferred ();
+
+    $(function () {$(".health-scorebar").render_scorebar ("data-health-score");});
+    $(function () {domready_deferred.resolve ();});
+    $.when (
+        domready_deferred,
+        $.getJSON ("{% url 'hmeter_frontend:project:eventdata' id=project.id %}"))
+      .done (function (_, eventdata)
+             {
+                 eventdata = eventdata[0];
+                 $.extend (window, eventdata);
+                 graphready_deferred.resolve ();
+             });
+  </script>
+{% endblock uncompressed_js %}
+
+{% block js %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/jquery.flot.min.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.flot.ranges.min.js' %}"></script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.flot.selection.min.js' %}"></script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.flot.stack.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.flot.time.min.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'jquery-treeview/jquery.treeview.js' %}"></script>
+  <script type="text/javascript"
+          src="{% static 'js/project/health-score-utils.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/ratelimit.js' %}"></script>
+  <script type="text/javascript"
+          src="{% static 'js/derived.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/detail/layout.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/detail/graphs.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/detail/metrics.js' %}">
+  </script>
+{% endblock js %}
+
+{% block main %}
+<header class="jumbotron">
+  <div class="container">
+    {% if project.logo %}
+      <img src="{{ MEDIA_URL }}{{ project.logo }}" id="project-logo" />
+    {% endif %}
+    <h1 id="project-title">
+      Project {{ project.name }}
+      <small id="project-date-range">
+        Data Range: {{ start_date|date:"DATE_FORMAT" }} to
+        {{ end_date|date:"DATE_FORMAT" }}
+      </small>
+    </h1>
+  </div>
+</header>
+
+<nav id="section-heading-links"
+     class="nav navbar navbar-static-top navbar-default hidden-xs">
+  <div class="container">
+    <h1 class="project-name navbar-right navbar-brand">{{ project.name }}</h1>
+    <!-- placeholder populated using JS -->
+  </div>
+</nav>
+
+<main role="main" class="container">
+  <section id="project">
+    <h1>Project</h1>
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li><a href="#summary" data-toggle="tab">Summary</a></li>
+      <li>
+        <a href="#activity-overview" data-toggle="tab">Activity Overview</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <section id="summary">
+        <h1>Summary</h1>
+
+        <p>{{ project.description }}</p>
+
+        <ul id="project-infrastructure-list">
+          <li>Project webpage: {{ project.website_url|urlize|default:"none" }}</li>
+          <li>Date started: {{ start_date|default:"unknown" }}</li>
+          {% if latest_release %}
+          <li>Version {{ latest_release.version }} released
+            {{ latest_release.date }}</li>
+          {% else %}
+          <li>No released versions yet</li>
+          {% endif %}
+
+          <li>License:
+            {{ project.all_licenses|join:", "|default:"<i>Not set up by administrator</i>" }}
+          </li>
+          <li>Contributor License Agreement:
+            {% if not project.has_contributor_agreement %} not {% endif %} present
+          </li>
+
+          <li>Governance:
+            {% if project.governance %}
+            {{ project.governance }}
+            {% else %}
+            <i>Not set up by administrator</i>
+            {% endif %}
+          </li>
+
+          {% if subprojects_count %}
+          <li>{{ subprojects_count }}
+            sub-project{{ subprojects_count|pluralize }}</li>
+          {% if pending_subprojects_count %}
+          <li>{{ pending_subprojects_count }}
+            sub-project{{ pending_subprojects_count|pluralize }} in
+            incubation</li>
+          {% endif %}
+          {% endif %}
+
+          <li>VCS
+            Repositor{{ vcs_repository_types|length|pluralize:"y,ies" }}:
+            {{ vcs_repository_types|join:", "|default:"none" }}
+
+            {% if vcs_repository_urls %}
+            <ul>
+              {% for url in vcs_repository_urls %}
+              <li>{{ url }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+
+          <li>Bug tracker{{ bug_tracker_types|length|pluralize }}:
+            {{ bug_tracker_types|join:", "|default:"none" }}
+
+            {% if bug_tracker_namespaces %}
+            <ul>
+              {% for ns in bug_tracker_namespaces %}
+              <li>{{ ns.bug_tracker.baseurl }}
+                {% if ns.product %}
+                (product={{ ns.product }}{% if ns.component %},
+                component={{ ns.component }}{% endif %})
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+
+          <li>CPE (Common Product Enumeration)
+            name{{ cpe_product_names.count|pluralize }}:
+            {% if cpe_product_names %}
+            <ul>
+              {% for cpe_product in cpe_product_names %}
+              <li>{{ cpe_product }}</li>
+              {% endfor %}
+            </ul>
+
+            {% else %}
+            <i>Not configured (required for CVE information)</i>
+            {% endif %}
+          </li>
+
+          <li>{{ mailing_list_count }} mailing
+            list{{ mailing_list_count|pluralize }}
+
+            {% if mailing_list_count %}
+            <ul>
+              {% for mailing_list in mailing_lists %}
+              <li>{{ mailing_list.posting_address|urlize }}
+                (archive: {{ mailing_list.archive_url|urlize }})</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+
+          <li>{{ irc_channel_count }} IRC
+            channel{{ irc_channel_count|pluralize }}
+
+            {% if irc_channel_count %}
+            <ul>
+              {% for channel in irc_channels %}
+              <li>{{ channel.name }} on {{ channel.server.server_url }}
+
+                {% if channel.meeting_logs_url %}
+                (Meeting logs in {{ channel.meeting_logs_url }})
+                {% else %}
+                (No meeting logs)
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+
+          <li>{{ blog_count }} blog{{ blog_count|pluralize }}
+            {% if blog_count %}
+            <ul>
+              {% for blog in blogs %}
+              <li>{{ blog.url|urlize }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+
+          <li>{{ microblog_count }} microblog{{ microblog_count|pluralize }}
+            {% if microblog_count %}
+              <ul>
+                {% for microblog in microblogs %}
+                  <li>{{ microblog }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+        </ul>
+      </section>
+
+      <section id="activity-overview">
+        <h1>Activity Overview</h1>
+
+        <p>
+          Four categories of data are collected. Shown here is the state of the
+          project in each of the categories as of {{ end_date|date:"DATE_FORMAT" }}.
+        </p>
+
+        {# Don't show top-level metric #}
+        <ul class="score-breakdown-list">
+          {% with scorebar_level_limit=0 %}
+            {% for score in score_tree.children %}
+              {% include 'hmeter_frontend/project/fragments/detail/metric-tree.html' %}
+            {% endfor %}
+          {% endwith %}
+        </ul>
+        <input class="reset-score-tree" type="button" value="Reset" />
+      </section>
+    </div>
+  </section>
+
+  {% with score_tree as score %}
+    {% defrecurse score %}
+      {% if level > 0 %}
+        <section id="{{ score.metric.title|slugify }}">
+          <h1
+             {% if score.metric.colour %}
+               style="color: {{ score.metric.colour }}"
+               data-custom-color="custom-color"
+             {% endif %}
+             >
+             {{ score.metric.title }}
+          </h1>
+          {% with basepath="hmeter_frontend/project/fragments/detail/sections/" %}
+            {% includeor basepath|add:score.metric.template_name|add:".html" %}
+              {% include basepath|add:"base.html" %}
+            {% endincludeor%}
+          {% endwith %}
+        {% else %}
+          {# We need to recurse at least once to get into the next level #}
+          {% for child in score.aggregate_children %}
+            {% recurse child %}
+          {% endfor %}
+        {% endif %}
+
+        {% if level > 0 %}
+        </section>
+      {% endif %}
+    {% enddefrecurse %}
+  {% endwith %}
+</main>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+{% load humanize %}
+
+{% block before_leaf_metrics %}
+  <div class="graph-container">
+    <div class="graph" id="bugs_opened_freq_graph"> </div>
+    <div class="graph" id="bugs_closed_freq_graph"></div>
+    <div class="graph" id="bug_reporter_freq_graph"></div>
+  </div>
+
+  <script type="text/javascript">
+    {% include "hmeter_frontend/project/fragments/detail/sections/bug-graphs.js" %}
+  </script>
+{% endblock %}
+
+{% block before_aggregate_metrics %}
+  <p>Top email address domains reporting bugs:</p>
+  <ul class="collapsible collapsed">
+    {% for domain, count, unique in bug_reports_domain_breakdown %}
+      <li><b>@{{ domain }}:</b> {{ count|intcomma }}
+        bug{{ count|pluralize }} reported from
+        {{ unique|intcomma }} address{{ unique|pluralize:"es" }}</li>
+      {% endfor %}
+  </ul>
+{% endblock %}

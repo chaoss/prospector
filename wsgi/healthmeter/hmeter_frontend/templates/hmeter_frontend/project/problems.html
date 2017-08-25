@@ -1,0 +1,31 @@
+{% extends "hmeter_frontend/base.html" %}
+{% load url from future %}
+{% load cachebuster %}
+
+{% block title %}Open Source Prospector: Problems{% endblock %}
+
+{% block head_matter %}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'css/project-problems.css' %}" />
+{% endblock head_matter %}
+
+{% block content %}
+  <section>
+    <h1>Projects with Problems</h1>
+    <ul id="project-problems">
+      {% for project, problems in project_problems %}
+        <li id="project-{{ project.id }}">
+          <a href="{% url 'hmeter_frontend:project:detail' pk=project.id %}">
+            {{ project.name }}
+          </a>
+
+          <ul>
+            {% for problem in problems %}
+              <li>{{ problem }}</li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock content %}

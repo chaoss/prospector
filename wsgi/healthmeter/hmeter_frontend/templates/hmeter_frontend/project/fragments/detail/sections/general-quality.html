@@ -1,0 +1,53 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+{% block before_leaf_metrics %}
+  {% load humanize %}
+
+  <div class="graph-container">
+    <div class="graph" id="outstanding_bugs_graph"></div>
+  </div>
+
+  <script type="text/javascript">
+    {% include "hmeter_frontend/project/fragments/detail/sections/general-quality-graphs.js" %}
+  </script>
+
+{% endblock %}
+
+{% block before_aggregate_metrics %}
+  <p>Reliability</p>
+  <ul>
+    <li>Number of bugs reported over last:
+      <ul>
+        {% for months, count in bugs_opened_count_period %}
+          <li>{{ months }} months: {{ count|intcomma }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li>Number of bugs closed over last:
+      <ul>
+        {% for months, count in bugs_closed_count_period %}
+          <li>{{ months }} months: {{ count|intcomma }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li>Number of severe bugs reported over last:
+      <ul>
+        {% for months, count in severe_bugs_count_period %}
+          <li>{{ months }} months: {{ count|intcomma }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+
+  <p>Size:</p>
+  <ul>
+    <li>Lines of code over last:
+      <ul>
+        {% for months, sloc in sloc_count_period %}
+          <li>{{ months }} months: {{ sloc|intcomma }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+{% endblock %}

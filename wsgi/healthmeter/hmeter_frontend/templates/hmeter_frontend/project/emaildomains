@@ -1,0 +1,2 @@
+{% for dom in domains %} - {{dom.domain}} ({{dom.count}})
+{%endfor%}

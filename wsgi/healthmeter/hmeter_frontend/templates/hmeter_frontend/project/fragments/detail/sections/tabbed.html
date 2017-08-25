@@ -1,0 +1,19 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+
+{% block before_aggregate_metrics %}
+  <ul class="nav nav-tabs" role="tablist">
+    {% for child in score.aggregate_children %}
+      <li>
+        <a href="#{{ child.metric.title|slugify }}" data-toggle="tab">
+          {{ child.metric.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock before_aggregate_metrics %}
+
+{% block aggregate_metrics %}
+  <div class="tab-content">
+    {{ block.super }}
+  </div>
+{% endblock %}

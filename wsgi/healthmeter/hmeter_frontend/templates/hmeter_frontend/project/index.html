@@ -1,0 +1,63 @@
+{% extends "hmeter_frontend/base.html" %}
+{% load url from future %}
+{% load cachebuster metrics jsonify %}
+
+{% block title %}Open Source Prospector: Project Listing{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/less"
+        href="{% static 'css/project-index.less' %}" />
+{% endblock css %}
+
+{% block uncompressed_js %}
+  {{ block.super }}
+  <script type="text/javascript"
+          src="{% url 'js_reverse' %}">
+  </script>
+  <script type="text/javascript">
+    var descriptions = {{ descriptions|jsonify }};
+  </script>
+{% endblock uncompressed_js %}
+{% block js %}
+  {{ block.super }}
+  <script type="text/javascript"
+          src="{% static 'js/jquery.tablesorter/js/jquery.tablesorter.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.tablesorter/js/jquery.tablesorter.widgets.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.tablesorter/beta-testing/pager-custom-controls.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.tablesorter/js/parsers/parser-date.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/derived.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/health-score-utils.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/index/health-scores.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/index/tablesorter.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/index/compare.js' %}">
+  </script>
+{% endblock js%}
+
+{% block content %}
+<section>
+  <h1>Monitored Projects</h1>
+  <a href="{% url 'hmeter_frontend:business_units' %}" id="business-units-link">
+    Alternate view of projects based on Business Units </a>
+
+    {% include "hmeter_frontend/project/fragments/project-listing-table.html" %}
+</section>
+{% endblock%}

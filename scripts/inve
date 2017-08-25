@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. $OPENSHIFT_PYTHON_DIR/virtenv/bin/activate
+
+exec "$@"

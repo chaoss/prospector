@@ -1,0 +1,348 @@
+@import "common.less";
+
+@navbar-margin-bottom: 0;
+
+// required for scrollspy
+[data-spy=scroll] {
+    position: relative;
+}
+
+#project-logo {
+    .make-xs-column (3);
+
+    vertical-align: middle;
+    height: 100%;
+    margin-top: @line-height-computed;
+}
+
+#project-title {
+    text-align: center;
+    .make-xs-column (12);
+}
+
+#project-logo + #project-title {
+    text-align: left;
+    .make-xs-column (9);
+}
+
+#project-date-range {
+    display: block;
+}
+
+#project-header {
+    text-align: center;
+    font-size: 4em;
+    border-radius: 0.1em;
+    padding: 0.2em 0;
+}
+
+#project-status {
+    float: right;
+    font-size: 2em;
+    display: inline-block;
+    text-align: center;
+}
+
+header.jumbotron {
+    margin-bottom: 0;
+}
+
+#section-heading-links {
+    // background: none transparent;
+    // border-width: none;
+    // .box-shadow(none);
+    &.affix-top .project-name {
+        display: none;
+    }
+
+    &.affix {
+        .navbar-fixed-top;
+        .navbar-default;
+
+        .project-name {
+            .navbar-brand;
+            margin-bottom: 0;
+        }
+    }
+}
+
+#timeless-metrics-list {
+    padding-left: 0;
+}
+
+#timeless-metrics-list li {
+    font-weight: bold;
+    font-size: 2em;
+    list-style-type: none;
+}
+
+// hack to make fragment links work with the navbar
+section[id] {
+    margin-top: -@navbar-height;
+    padding-top: @navbar-height;
+}
+
+section:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.graph {
+    .make-sm-column (4);
+}
+
+.graph-container {
+    .container;
+}
+
+.score-breakdown-list ul, .score-breakdown-list li {
+    clear: right;
+}
+
+.graph-caption {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.graph .working-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1em;
+    margin-left: -5ex;
+    padding: 2px;
+    border: 2px solid #aa0000;
+    border-radius: 0.5em;
+    background-color: #fff;
+    opacity: 0.90;
+    font-weight: bold;
+}
+
+.trend-icon {
+    height: 3em;
+    margin-top: 3em;
+    float: right;
+    display: none;
+}
+
+.graph-canvas {
+    width: 100%;
+    height: 10em;
+}
+
+.graph-canvas:after {
+    clear: right;
+}
+
+.graph-selectable-layers li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.graph-selectable-layers ul {
+    padding: 0;
+}
+
+#healthscore_graph {
+    width: 50%;
+}
+
+#score-breakdown section {
+    border-bottom: 0;
+    clear: right;
+    padding-bottom: 0.5em;
+}
+
+#score-breakdown section h1 {
+    margin: 0;
+}
+
+#score-breakdown p .green-score,
+#score-breakdown p .yellow-score,
+#score-breakdown p .red-score {
+    font-weight: bold;
+}
+
+.green-score {
+    color: green;
+}
+
+.yellow-score {
+    color: #AB8C1B;
+}
+
+.red-score {
+    color: red;
+}
+
+.gray-score {
+    font-style: italic;
+    color: gray;
+    text-decoration: line-through;
+}
+
+.score-breakdown-list {
+    line-height: 2em;
+}
+
+.graph[data-metric-id] + .score-breakdown-list {
+    display: none;
+}
+
+.reset-score-tree {
+    float: right;
+}
+
+.reset-score-tree:after {
+    break: right;
+}
+
+.metric-value, .metric-description {
+    font-weight: bold;
+}
+
+.collapse-button {
+    color: #676767;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.collapse-button:hover {
+    color: #aaa;
+}
+
+.collapsible.collapsed li+li+li+li+li+li:not(.collapse-button) {
+    display: none;
+}
+
+main {
+    counter-reset: section;
+}
+
+main section[id] {
+    counter-reset: subsection;
+}
+
+main section[id] section[id] {
+    counter-reset: subsubsection;
+}
+
+main section[id] h1:before {
+    content: counter(section) ". ";
+    counter-increment: section;
+}
+
+main section[id] section[id] h1:before {
+    content: counter(section) "." counter(subsection) ". ";
+    counter-increment: subsection;
+}
+
+main section[id] section[id] section[id] h1:before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+    counter-increment: subsubsection;
+}
+
+main .tab-content > section[id] > h1 {
+    display: none;
+}
+
+section .nav-tabs {
+    margin-bottom: 1.6em;
+}
+
+// adapted from .tab-content
+section .tab-content {
+    > section {
+        display: none;
+        visibility: hidden;
+    }
+
+    > section.active {
+        display: block;
+        visibility: visible;
+    }
+}
+
+.score-breakdown-list .ui-slider-handle {
+    text-decoration: none;
+    font-size: 0.8em;
+    line-height: 1em;
+    width: 2.5em;
+    margin-left: -1.25em;        /* must be -width / 2 */
+    text-align: center;
+}
+
+#score-tree {
+    clear: right;
+}
+
+.weight-control, .health-scorebar {
+    float: right;
+}
+
+div.health-scorebar {
+    width: 22.2em;
+}
+
+.watermark {
+    color: #aaa;
+}
+
+.slider {
+    .watermark {
+        display: inline-block;
+        margin-right: 1em;
+
+        text-align: center;
+        width: 100%;
+        font-size: 0.8em;
+        line-height: 0.8em;
+        position: absolute;
+        z-index: 0;
+    }
+
+    .slider-handle {
+        z-index: 1;
+        opacity: 1;
+        line-height: @line-height-base;
+        text-align: center;
+        color: @gray-lighter;
+        font-size: 0.6em;
+        width: 4.5ex;
+
+        &.round {
+            border-radius: 10px;
+        }
+    }
+
+    .slider-selection {
+        background-color: @gray;
+	#gradient > .vertical(@gray, @gray-light);
+    }
+}
+
+.pinbutton {
+    display: inline-block;
+    height: 1.2em;
+    width: 1.2em;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 100% 100%;
+}
+
+.pinbutton.pinned {
+    background-image: url(../pin-down.png);
+}
+
+.pinbutton.unpinned {
+    background-image: url(../pin-up.png);
+}
+
+img.warning-na-metric {
+    width: 1em;
+    height: 1em;
+}

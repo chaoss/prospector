@@ -1,0 +1,20 @@
+# Copyright 2017 Red Hat, Inc.
+# License: GPLv3 or any later version
+
+#!/bin/bash
+
+set -e
+
+MEMCACHED_BINARY=${OPENSHIFT_DATA_DIR}opt/memcached/bin/memcached
+
+if [ ! -e MEMCACHED_BINARY ]; then
+    pkill -U$(whoami) memcached || true
+    $MEMCACHED_BINARY -l $OPENSHIFT_PYTHON_IP -p 22322 -m 64 -d
+    echo "${MEMCACHED_BINARY} started!"
+
+else
+  echo "============================================"
+  echo "${MEMCACHED_BINARY} does not exist!."
+  echo "You should manually install it ..."
+  echo "============================================"
+fi

@@ -1,0 +1,124 @@
+{% extends "hmeter_frontend/base.html" %}
+{% load url from future %}
+{% load cachebuster metrics divby %}
+
+{% block title %}Open Source Prospector: Compare Projects{% endblock %}
+
+{% block head_matter %}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'css/project-compare.css' %}" />
+  <script type="text/javascript"
+          src="{% static 'js/jquery-sortable.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/jquery.flot.min.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/jquery.flot.time.min.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/health-score-utils.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/compare/colourize.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/compare/draggable-headers.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/compare/scorebars.js' %}">
+  </script>
+  <script type="text/javascript"
+          src="{% static 'js/project/compare/expandable-metrics.js' %}">
+  </script>
+
+
+  {% with projlen=projects|length %}
+    <style type="text/css">
+      col.project {
+          width: {{ 60|divby:projlen }}%;
+      }
+    </style>
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+<section>
+  <h1>Compare Projects</h1>
+
+  <div class="horiz-scrollable">
+    <table id="project-comparison">
+      <colgroup>
+        <col class="metric" />
+      </colgroup>
+
+      <colgroup span="{{ projects|length }}" class="project-columns">
+        {% for i in projects %}
+          <col class="project" />
+        {% endfor %}
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th></th> <!-- Sink the metric column -->
+          {% for proj in projects %}
+            <th data-project-id="{{ proj.id }}" class="project">
+              <a href="{% url 'hmeter_frontend:project:detail' pk=proj.id %}">
+                {{ proj.name }}
+              </a>
+            </th>
+          {% endfor %}
+        </tr>
+      </thead>
+
+      <tbody class="metric-scorebars">
+        {% for entry in l1_score_breakdown %}
+          <tr>
+            <td class="metric"
+                {% if entry.colour %}
+                  style="color: {{ entry.colour }}"
+                {% endif %}
+                >
+                {{ entry.title }}
+            </td>
+
+            {% for data in entry.datalist %}
+              <td class="project">
+                <div class="health-scorebar"
+                     data-health-score="{{ data.score }}">
+                </div>
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+
+      <tbody class="metric-rows">
+        {% for entry in score_breakdown %}
+          <tr data-level="{{ entry.level }}" data-metric-id="{{ entry.id }}"
+              data-metric-timebased="{{ entry.time_based }}">
+            <td class="metric"
+                {% if entry.colour %}
+                  style="color: {{ entry.colour }}"
+                {% endif %}
+                >{{ entry.title }}
+            </td>
+
+            {% for data in entry.datalist %}
+              {% if entry.has_children %}
+                {# children are present, so don't show N/A score #}
+                <td class="project"></td>
+
+              {% else %}
+                <td data-health-score="{{ data.score }}"
+                    class="project">
+                  {{ data.raw_value|format_score }}{{ data.unit }}
+                </td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "hmeter_frontend/project/index.html" %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block title %}Open Source Prospector: Business Units{% endblock %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/less"
+        href="{% static 'css/business-units.less' %}" />
+{% endblock %}
+
+{% block content %}
+  <section>
+    <h1>Business Units</h1>
+
+    <a href="{% url 'hmeter_frontend:project:index' %}">Project Listing</a>
+    {% for bu in business_units %}
+      <section class="business-unit">
+        <h1>{{ bu.name }}</h1>
+
+        {% for product in bu.products %}
+          {% if forloop.first %}
+            Products:
+            <ol>
+          {% endif %}
+
+          <li>
+            {% if product.projects %}
+              <div data-toggle="collapse"
+                   data-target="#tbl-{{ product.name|slugify }}">
+                <span class="caret"></span>{{ product.name }}
+              </div>
+            {% elif product.url %}
+              <a href="{{ product.url }}" target="_blank">{{ product.name }}</a>
+            {% else %}
+              {{ product.name }}
+            {% endif %}
+
+            {% if product.projects %}
+              <div class="collapse collapsable-projects"
+                   id="tbl-{{ product.name|slugify }}">
+                {% with product.projects as projects %}
+                  {% include 'hmeter_frontend/project/fragments/project-listing-table.html' %}
+                {% endwith %}
+              </div>
+            {% endif %}
+          </li>
+
+          {% if forloop.last %}
+            </ol>
+          {% endif %}
+        {% endfor %}
+
+        {% with bu.root_projects as projects %}
+          {% if projects %}
+            Associated Projects:
+            {% include 'hmeter_frontend/project/fragments/project-listing-table.html' %}
+          {% endif %}
+        {% endwith %}
+      </section>
+    {% endfor %}
+
+    {% if unassociated_projects %}
+      <section class="business-unit">
+        <h1>Miscellaneous</h1>
+        Unassociated projects:
+
+        {% with unassociated_projects as projects %}
+          {% include 'hmeter_frontend/project/fragments/project-listing-table.html' %}
+        {% endwith %}
+      </section>
+    {% endif %}
+  </section>
+{% endblock %}

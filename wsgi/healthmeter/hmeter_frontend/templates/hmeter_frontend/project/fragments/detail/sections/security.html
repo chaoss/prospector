@@ -1,0 +1,19 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+{% load humanize %}
+
+{% block before_aggregate_metrics %}
+<p>Security:</p>
+<ul>
+  <li>CVEs (Common Vulnerabilities and Exposures) filed over last:
+    <ul>
+      {% if cpe_product_names %}
+        {% for months, count in cve_count_period %}
+          <li>{{ months }} months: {{ count|intcomma }}</li>
+        {% endfor %}
+      {% else %}
+        <li><i>unknown (CPE needs to be configured)</i></li>
+      {% endif %}
+    </ul>
+  </li>
+</ul>
+{% endblock %}

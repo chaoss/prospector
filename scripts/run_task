@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+# Copyright 2017 Red Hat, Inc.
+# License: GPLv3 or any later version
+
+import os
+import sys
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'healthmeter.settings'
+
+if 'OPENSHIFT_REPO_DIR' in os.environ:
+    repo_root = os.environ['OPENSHIFT_REPO_DIR']
+    virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
+    os.environ['PYTHON_EGG_CACHE'] = os.path.join(
+        virtenv, 'lib/python2.6/site-packages')
+    virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+
+    try:
+        execfile(virtualenv, dict(__file__=virtualenv))
+    except:
+        pass
+
+else:
+    this_dir = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
+    repo_root = os.path.join(this_dir, '..')
+
+sys.path.extend([os.path.join(repo_root, 'wsgi', 'healthmeter'),
+                 os.path.join(repo_root, 'wsgi'),
+                 os.path.join(repo_root, 'libs')])
+
+task_name = os.path.basename(__file__)
+
+from django.core.management import call_command
+call_command(task_name)

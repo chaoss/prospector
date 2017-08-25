@@ -1,0 +1,39 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+
+{% load jsonify %}
+{% load humanize %}
+{% load url from future %}
+
+{% block before_leaf_metrics %}
+  <div class="graph-container">
+    <div class="graph" id="commit_freq_graph"></div>
+    <div class="graph" id="cumulative_commits_graph"></div>
+    <div class="graph" id="committer_freq_graph"></div>
+  </div>
+
+  <script type="text/javascript">
+    {% include "hmeter_frontend/project/fragments/detail/sections/commit-graphs.js" %}
+  </script>
+{% endblock %}
+
+{% block before_aggregate_metrics %}
+  <p>Number of commits over last:</p>
+  <ul>
+    {% for months, commits, contributors in commit_count_period %}
+      <li>
+        <b>{{ months }} months:</b> {{ commits|intcomma }}
+        commit{{ commits|pluralize }} from
+        {{ contributors|intcomma }} contributor{{ contributors|pluralize }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p>Top email address domains committing:</p>
+  <ul class="collapsible collapsed">
+    {% for domain, count, unique in commit_domain_breakdown %}
+      <li><b>@{{ domain }}</b>: {{ count|intcomma }}
+        commit{{ count|pluralize }} from
+        {{ unique|intcomma }} address{{ unique|pluralize:"es" }}</li>
+      {% endfor %}
+  </ul>
+{% endblock %}

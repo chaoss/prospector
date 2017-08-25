@@ -1,0 +1,30 @@
+[
+    {
+        "fields": {
+            "name": "Platform"
+        }, 
+        "model": "projectinfo.businessunit", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "name": "Cloud"
+        }, 
+        "model": "projectinfo.businessunit", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "name": "Middleware"
+        }, 
+        "model": "projectinfo.businessunit", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "name": "Storage"
+        }, 
+        "model": "projectinfo.businessunit", 
+        "pk": 4
+    }
+]

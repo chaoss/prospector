@@ -1,0 +1,19 @@
+[
+    {
+        "pk": 1,
+        "model": "vcsinfo.type",
+        "fields": {"name": "git"}
+    },
+
+    {
+        "pk": 2,
+        "model": "vcsinfo.type",
+        "fields": {"name": "svn"}
+    },
+
+    {
+        "pk": 3,
+        "model": "vcsinfo.type",
+        "fields": {"name": "bzr"}
+    }
+]

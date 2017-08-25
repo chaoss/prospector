@@ -1,0 +1,50 @@
+{% extends "hmeter_frontend/base.html" %}
+{% load url from future %}
+{% load cachebuster %}
+
+{% block title %}
+  Open Source Prospector: {{ project.name }} score history
+{% endblock title %}
+
+{% block head_matter %}
+  <link type="text/css" rel="stylesheet"
+        href="{% static 'css/project-compare.css' %}" />
+{% endblock head_matter %}
+
+{% block content %}
+  <section>
+    <h1>Score history for {{ project.name }}</h1>
+
+    <div class="horiz-scrollable">
+      <table id="project-metric-scores">
+        <colgroup>
+          <col class="metric" />
+          {% for date in dates %}
+            <col class="score" />
+          {% endfor %}
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th></th> <!-- Sink the metric column -->
+            {% for date in dates %}
+              <th>{{ date|date:"DATE_FORMAT" }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for metric in metricdata %}
+            <tr class="level{{ metric.level }}">
+              <td class="metric">{{ metric.title }}</td>
+              {% for line in metric.datalist %}
+                <td>raw={{ line.raw_value }}, score={{ line.score }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+{% endblock content %}

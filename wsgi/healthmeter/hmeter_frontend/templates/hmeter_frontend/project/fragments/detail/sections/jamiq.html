@@ -1,0 +1,19 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+{% load cachebuster %}
+
+{% block before_leaf_metrics %}
+  <div class="graph-container">
+    <div class="graph" id="jamiq_freq_graph"></div>
+    <div class="graph" id="cumulative_jamiq_graph"></div>
+  </div>
+
+  <script type="text/javascript">
+    {% include "hmeter_frontend/project/fragments/detail/sections/jamiq-graphs.js" %}
+  </script>
+
+  <p>
+    Social sentiments statistics are derived from JamiQ. An explanation of the
+    technology used to derive the sentiments from social media can be found in
+    <a href="{% static 'jamiq-technology-explained.pdf' %}">this document</a>.
+  </p>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load recurse %}
+
+{% defrecurse score %}
+  <li>
+    {% if level <= scorebar_level_limit %}
+      <div class="health-scorebar"
+           data-metric-id="{{ score.metric.id }}">
+      </div>
+    {% else %}
+      <div class="weight-control">
+        <input class="weight-slider" type="text"
+             data-metric-id="{{ score.metric.id }}" />
+        <div class="pinbutton unpinned weight-pinbutton"
+             data-metric-id="{{ score.metric.id }}">
+        </div>
+      </div>
+    {% endif %}
+
+    <div>
+      <span class="metric-description"
+            style="color: {{ score.metric.colour }}">
+            {{ score.metric.title }}
+      </span>
+      (score:
+      <span class="metric-score metric-value"
+            data-metric-id="{{ score.metric.id }}">
+      </span>,
+
+      weight:
+      <span class="metric-weight metric-value"
+            data-metric-id="{{ score.metric.id }}">
+      </span>)
+    </div>
+
+    {% for child in score.children %}
+      {% if forloop.first %}
+        <ul {% if level >= 1 %}style="display: none"{% endif %}>
+      {% endif %}
+
+      {% recurse child %}
+
+      {% if forloop.last %}
+        </ul>
+      {% endif %}
+    {% endfor %}
+  </li>
+{% enddefrecurse score %}

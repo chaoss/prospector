@@ -1,0 +1,22 @@
+.collapsable-projects .project-search {
+    display: none;
+}
+
+[data-toggle="collapse"] {
+    cursor: pointer;
+
+    .caret {
+        margin-right: 2px;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-left: 4px solid;
+    }
+
+    &[aria-expanded="true"] .caret {
+        border-top: 4px solid;
+        border-bottom: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+    }
+}

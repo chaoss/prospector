@@ -1,0 +1,36 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+{% load humanize %}
+
+{% block before_leaf_metrics %}
+  <div class="graph-container">
+    <div class="graph" id="email_freq_graph"></div>
+    <div class="graph" id="cumulative_emails_graph"></div>
+    <div class="graph" id="poster_freq_graph"></div>
+  </div>
+
+  <script type="text/javascript">
+    {% include "hmeter_frontend/project/fragments/detail/sections/mailing-list-graphs.js" %}
+  </script>
+{% endblock %}
+
+{% block before_aggregate_metrics %}
+  <p>Number of emails over last:</p>
+  <ul>
+    {% for months, mails, posters in mail_count_period %}
+      <li>
+        <b>{{ months }} months:</b>
+        {{ mails|intcomma }} post{{ mails|pluralize }} from
+        {{ posters|intcomma }} poster{{ posters|pluralize }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p>Top email address domains posting:</p>
+  <ul class="collapsible collapsed">
+    {% for domain, count, unique in mlpost_domain_breakdown %}
+      <li><b>@{{ domain }}:</b> {{ count|intcomma }}
+        post{{ count|pluralize }} from
+        {{ unique|intcomma }} address{{ unique|pluralize:"es" }}</li>
+      {% endfor %}
+  </ul>
+{% endblock %}

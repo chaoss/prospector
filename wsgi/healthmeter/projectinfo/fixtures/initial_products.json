@@ -1,0 +1,302 @@
+[
+{
+    "pk": 1, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Linux (Server)"
+    }
+},
+{
+    "pk": 2, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Linux (Desktop)"
+    }
+},
+{
+    "pk": 3, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Linux (Scientific Computing)"
+    }
+},
+{
+    "pk": 4, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Linux (IBM Power)"
+    }
+},
+{
+    "pk": 5, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Linux (IBM System z)"
+    }
+},
+{
+    "pk": 6, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Network Satellite"
+    }
+},
+{
+    "pk": 7, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Directory Server"
+    }
+},
+{
+    "pk": 8, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Certificate System"
+    }
+},
+{
+    "pk": 9, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Virtualization for Servers"
+    }
+},
+{
+    "pk": 10, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Enterprise Virtualization for Desktops"
+    }
+},
+{
+    "pk": 11, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "Red Hat Messaging, Realtime and Grid"
+    }
+},
+{
+    "pk": 12, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "CloudForms"
+    }
+},
+{
+    "pk": 13, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "ManageIQ"
+    }
+},
+{
+    "pk": 14, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "OpenShift Enterprise"
+    }
+},
+{
+    "pk": 15, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Infrastructure"
+        ], 
+        "name": "OpenStack"
+    }
+},
+{
+    "pk": 16, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Developer Studio Portfolio"
+    }
+},
+{
+    "pk": 17, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Web Framework Kit"
+    }
+},
+{
+    "pk": 18, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Application Platform"
+    }
+},
+{
+    "pk": 19, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Data Grid"
+    }
+},
+{
+    "pk": 20, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Web Server"
+    }
+},
+{
+    "pk": 21, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Portal Platform"
+    }
+},
+{
+    "pk": 22, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss SOA Platform"
+    }
+},
+{
+    "pk": 23, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss FuseSource Integration Products"
+    }
+},
+{
+    "pk": 24, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss BRMS"
+    }
+},
+{
+    "pk": 25, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Data Services Platform"
+    }
+},
+{
+    "pk": 26, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Messaging"
+    }
+},
+{
+    "pk": 27, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Application Platform"
+        ], 
+        "name": "JBoss Operations Network"
+    }
+},
+{
+    "pk": 28, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Storage"
+        ], 
+        "name": "Red Hat Storage (On Premise)"
+    }
+},
+{
+    "pk": 29, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Storage"
+        ], 
+        "name": "Red Hat Storage (On Public Cloud)"
+    }
+},
+{
+    "pk": 30, 
+    "model": "projectinfo.product", 
+    "fields": {
+        "business_unit": [
+            "Storage"
+        ], 
+        "name": "Red Hat Storage (On Hybrid Cloud)"
+    }
+}
+]

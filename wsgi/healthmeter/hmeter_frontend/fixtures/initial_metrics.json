@@ -1,0 +1,1134 @@
+[
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : null,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 154,
+         "tree_id" : 1,
+         "sibling_order" : 0,
+         "level" : 0,
+         "lft" : 1,
+         "weight" : 100,
+         "title" : "Overall Project Activity"
+      },
+      "pk" : 1,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "commit-activity",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "The amount of code committed to the project from various groups.",
+         "rght" : 44,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 2,
+         "lft" : 29,
+         "weight" : 25,
+         "title" : "Commits Activity"
+      },
+      "pk" : 2,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "mailing-list-activity",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Project mailing lists: the type of individuals, and organizations they are from.",
+         "rght" : 82,
+         "tree_id" : 1,
+         "sibling_order" : 5,
+         "level" : 2,
+         "lft" : 69,
+         "weight" : 20,
+         "title" : "Mailing Lists Activity"
+      },
+      "pk" : 3,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "bug-report-activity",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "The number of bugs reported and the groups reporting it",
+         "rght" : 58,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 2,
+         "lft" : 45,
+         "weight" : 20,
+         "title" : "Bug Reports Activity"
+      },
+      "pk" : 4,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "irc-events",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Frequency of IRC conversations and the participation rates",
+         "rght" : 114,
+         "tree_id" : 1,
+         "sibling_order" : 7,
+         "level" : 2,
+         "lft" : 99,
+         "weight" : 10,
+         "title" : "IRC Activity"
+      },
+      "pk" : 5,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "blogs-activity",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Blogs posts by coders/testers etc of the project including those in planets",
+         "rght" : 98,
+         "tree_id" : 1,
+         "sibling_order" : 6,
+         "level" : 2,
+         "lft" : 83,
+         "weight" : 10,
+         "title" : "Blog Posts"
+      },
+      "pk" : 6,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Meeting that are in person – seminars, conferences, hackfests",
+         "rght" : 68,
+         "tree_id" : 1,
+         "sibling_order" : 4,
+         "level" : 2,
+         "lft" : 59,
+         "weight" : 10,
+         "title" : "Events and Meeting Activity"
+      },
+      "pk" : 7,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : 1,
+         "colour" : "#1e6faf",
+         "time_based" : false,
+         "description" : "",
+         "rght" : 23,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 1,
+         "lft" : 2,
+         "weight" : 20,
+         "title" : "Infrastructure"
+      },
+      "pk" : 26,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "tabbed",
+         "algorithm" : null,
+         "parent" : 1,
+         "colour" : "#005e63",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 115,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 1,
+         "lft" : 24,
+         "weight" : 30,
+         "title" : "Activity"
+      },
+      "pk" : 27,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "tabbed",
+         "algorithm" : null,
+         "parent" : 1,
+         "colour" : "#fe00ea",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 129,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 1,
+         "lft" : 116,
+         "weight" : 30,
+         "title" : "Code Quality"
+      },
+      "pk" : 28,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "publicity",
+         "algorithm" : null,
+         "parent" : 1,
+         "colour" : "#6633fd",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 153,
+         "tree_id" : 1,
+         "sibling_order" : 4,
+         "level" : 1,
+         "lft" : 130,
+         "weight" : 20,
+         "title" : "Publicity"
+      },
+      "pk" : 29,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 19,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Chat support from other project contributors.",
+         "rght" : 16,
+         "tree_id" : 1,
+         "sibling_order" : 7,
+         "level" : 2,
+         "lft" : 15,
+         "weight" : 10,
+         "title" : "Does it have IRC channels?"
+      },
+      "pk" : 30,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 20,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Platform for discussion and consensus-building, information-sharing and public recognition.",
+         "rght" : 6,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 2,
+         "lft" : 5,
+         "weight" : 10,
+         "title" : "Does it have a mailing list?"
+      },
+      "pk" : 31,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 21,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Documents high-level project objectives and key parameters.",
+         "rght" : 8,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 2,
+         "lft" : 7,
+         "weight" : 10,
+         "title" : "Does it have a project definition statement on website?"
+      },
+      "pk" : 32,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 22,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Allows software defects to be tracked effectively and consistently.",
+         "rght" : 14,
+         "tree_id" : 1,
+         "sibling_order" : 6,
+         "level" : 2,
+         "lft" : 13,
+         "weight" : 10,
+         "title" : "Does it have a bugzilla/bug tracking system?"
+      },
+      "pk" : 33,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 23,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Mechanism for dissemination of information and receiving of direct feedback.",
+         "rght" : 22,
+         "tree_id" : 1,
+         "sibling_order" : 10,
+         "level" : 2,
+         "lft" : 21,
+         "weight" : 10,
+         "title" : "Does it have a project blog?"
+      },
+      "pk" : 34,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 24,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Allows potential contributors to understand how they should engage the project, what is expected of them and what protections are provided to ensure that their contributions will always be available to them.",
+         "rght" : 18,
+         "tree_id" : 1,
+         "sibling_order" : 8,
+         "level" : 2,
+         "lft" : 17,
+         "weight" : 10,
+         "title" : "Does it have a governance model identified on the website?"
+      },
+      "pk" : 35,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 25,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Mechanism for communicating the intention and status of the project at any given point in time.",
+         "rght" : 4,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 2,
+         "lft" : 3,
+         "weight" : 10,
+         "title" : "Does it have a website?"
+      },
+      "pk" : 36,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 1,
+         "parent" : 2,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: If more than 50% of COMMITTERS are from one domain (via email ID) it is dominated by one set of people. Suggested target is to have it less than 35%.",
+         "rght" : 37,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 36,
+         "weight" : 35,
+         "title" : "Percentage of committers by dominant domain name"
+      },
+      "pk" : 37,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 2,
+         "parent" : 2,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rule: If more than 50% of CODE COMMITS are from one domain (via email ID) it is dominated by one set of people.  Suggested target is to have it less than 35%.",
+         "rght" : 39,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 38,
+         "weight" : 35,
+         "title" : "Percentage of commits by dominant domain name"
+      },
+      "pk" : 38,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 11,
+         "parent" : 2,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "How many unique domains are represented?",
+         "rght" : 41,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 3,
+         "lft" : 40,
+         "weight" : 20,
+         "title" : "Unique email address domains"
+      },
+      "pk" : 39,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 3,
+         "parent" : 3,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: If more than 50% of MAILING LIST POSTERS are from one domain (via email ID) it is dominated by one set of people. Suggested target is to have it less than 35%.",
+         "rght" : 77,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 76,
+         "weight" : 40,
+         "title" : "Percentage of mailing list posts by dominant domain name"
+      },
+      "pk" : 40,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 4,
+         "parent" : 3,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: If more than 50% of MAILING LIST POSTS are from one domain (via email ID) it is dominated by one set of people. Suggested target is to have it less than 35%.",
+         "rght" : 79,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 78,
+         "weight" : 40,
+         "title" : "Percentage of mailing list threads by dominant domain name"
+      },
+      "pk" : 41,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 12,
+         "parent" : 3,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "How many unique domains are represented?",
+         "rght" : 81,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 3,
+         "lft" : 80,
+         "weight" : 20,
+         "title" : "Unique email address domains"
+      },
+      "pk" : 42,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 5,
+         "parent" : 4,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rule: If more than 50% of BUG REPORTERS are from one domain (via email ID) it is dominated by one set of people.  Suggested target is to have it less than 35%.",
+         "rght" : 53,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 52,
+         "weight" : 40,
+         "title" : "Percentage of bug reporters by dominant domain name"
+      },
+      "pk" : 43,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 6,
+         "parent" : 4,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rule: If more than 50% of BUG REPORTS are from one domain (via email ID) it is dominated by one set of people.  Suggested target is to have it less than 35%.",
+         "rght" : 55,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 54,
+         "weight" : 40,
+         "title" : "Percentage of bug reports by dominant domain name"
+      },
+      "pk" : 44,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 13,
+         "parent" : 4,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "How many unique domains are represented?",
+         "rght" : 57,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 3,
+         "lft" : 56,
+         "weight" : 20,
+         "title" : "Unique bug reporter domains"
+      },
+      "pk" : 45,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 7,
+         "parent" : 5,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Different IRC channels indicate a varied grouping of interest and is preferred.",
+         "rght" : 107,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 106,
+         "weight" : 20,
+         "title" : "Number of IRC channels"
+      },
+      "pk" : 46,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 8,
+         "parent" : 5,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Weekly IRC meetings are good.",
+         "rght" : 109,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 108,
+         "weight" : 30,
+         "title" : "Number of IRC meetings per month"
+      },
+      "pk" : 47,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 9,
+         "parent" : 5,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Lines of IRC chat indicate engagement.",
+         "rght" : 111,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 3,
+         "lft" : 110,
+         "weight" : 30,
+         "title" : "Number of lines per IRC session"
+      },
+      "pk" : 48,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 10,
+         "parent" : 5,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: More participants are good.",
+         "rght" : 113,
+         "tree_id" : 1,
+         "sibling_order" : 4,
+         "level" : 3,
+         "lft" : 112,
+         "weight" : 20,
+         "title" : "Average number of participants per IRC meeting"
+      },
+      "pk" : 49,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 15,
+         "parent" : 6,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Weekly posts are preferred.",
+         "rght" : 95,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 94,
+         "weight" : 25,
+         "title" : "Shortest interval between blog posts"
+      },
+      "pk" : 50,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 16,
+         "parent" : 6,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: At least one post per week is preferred.",
+         "rght" : 97,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 3,
+         "lft" : 96,
+         "weight" : 25,
+         "title" : "Longest interval between blog posts"
+      },
+      "pk" : 51,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 14,
+         "parent" : 6,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Posts by developers are indication of activity and at least 4 per month is good.",
+         "rght" : 93,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 92,
+         "weight" : 50,
+         "title" : "Number of posts per month"
+      },
+      "pk" : 52,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 17,
+         "parent" : 7,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: At least 2 meetings in person per month is preferred.",
+         "rght" : 65,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 64,
+         "weight" : 50,
+         "title" : "Events per month"
+      },
+      "pk" : 53,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 18,
+         "parent" : 7,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: The interval of meeting should be less than 4 weeks.",
+         "rght" : 67,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 66,
+         "weight" : 50,
+         "title" : "Longest interval between events"
+      },
+      "pk" : 54,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "general-quality",
+         "algorithm" : null,
+         "parent" : 28,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Generally accepted norms are the numbers of bugs reports per 1,000 lines of source code (excluding comments in code) and how rapidly it gets fixed",
+         "rght" : 122,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 2,
+         "lft" : 117,
+         "weight" : 60,
+         "title" : "General Quality"
+      },
+      "pk" : 55,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "security",
+         "algorithm" : null,
+         "parent" : 28,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Common Vulnerabilities and Exposures (https://cve.mitre.org/) is an industry accepted security vulnerability reporting benchmark",
+         "rght" : 128,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 2,
+         "lft" : 123,
+         "weight" : 40,
+         "title" : "Security"
+      },
+      "pk" : 56,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 32,
+         "parent" : 55,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: The lesser the number of bugs reported per 1 KLOC the better.",
+         "rght" : 119,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 118,
+         "weight" : 50,
+         "title" : "Bugs per KLOC"
+      },
+      "pk" : 57,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 34,
+         "parent" : 55,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Fixing code/time indicates a level of developer focus and project activity score.",
+         "rght" : 121,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 120,
+         "weight" : 50,
+         "title" : "Ratio of bugs opened to bugs closed"
+      },
+      "pk" : 58,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 29,
+         "parent" : 56,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: All CVEs are bugs and closure of CVEs indicate bug fix activity.",
+         "rght" : 125,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 124,
+         "weight" : 50,
+         "title" : "CVEs reported per KLOC"
+      },
+      "pk" : 59,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : 29,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 148,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 2,
+         "lft" : 141,
+         "weight" : 30,
+         "title" : "Blogs"
+      },
+      "pk" : 60,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : 29,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 152,
+         "tree_id" : 1,
+         "sibling_order" : 4,
+         "level" : 2,
+         "lft" : 149,
+         "weight" : 30,
+         "title" : "Events"
+      },
+      "pk" : 61,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "jamiq",
+         "algorithm" : null,
+         "parent" : 29,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "",
+         "rght" : 140,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 2,
+         "lft" : 135,
+         "weight" : 40,
+         "title" : "Social Sentiments"
+      },
+      "pk" : 63,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 26,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Allows contributors to preserve their copyrights instead of assigning it to the project.",
+         "rght" : 10,
+         "tree_id" : 1,
+         "sibling_order" : 4,
+         "level" : 2,
+         "lft" : 9,
+         "weight" : 10,
+         "title" : "Does it not need a contributor licensing statement or agreement?"
+      },
+      "pk" : 64,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 28,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Conforms to the open source definition (OSD).",
+         "rght" : 12,
+         "tree_id" : 1,
+         "sibling_order" : 5,
+         "level" : 2,
+         "lft" : 11,
+         "weight" : 10,
+         "title" : "Does it have an OSI approved open source license?"
+      },
+      "pk" : 65,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 27,
+         "parent" : 26,
+         "colour" : "",
+         "time_based" : false,
+         "description" : "Rationale: Improves code management and communication of code changes for review.",
+         "rght" : 20,
+         "tree_id" : 1,
+         "sibling_order" : 9,
+         "level" : 2,
+         "lft" : 19,
+         "weight" : 10,
+         "title" : "Does it have a source code repository like git/svn?"
+      },
+      "pk" : 66,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : 27,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Release was within the last 180 days (6 months)",
+         "rght" : 28,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 2,
+         "lft" : 25,
+         "weight" : 5,
+         "title" : "Release Activity"
+      },
+      "pk" : 67,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 36,
+         "parent" : 2,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "How many UNIQUE COMMITERS are represented?",
+         "rght" : 43,
+         "tree_id" : 1,
+         "sibling_order" : 4,
+         "level" : 3,
+         "lft" : 42,
+         "weight" : 10,
+         "title" : "Unique committers"
+      },
+      "pk" : 68,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 37,
+         "parent" : 56,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Rapidness of CVE fix is critical for the security of the users of the project.",
+         "rght" : 127,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 126,
+         "weight" : 50,
+         "title" : "Ratio of CVEs opened to CVEs closed"
+      },
+      "pk" : 69,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 33,
+         "parent" : 67,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rule: New project releases within the last 6 months, Green, within the last 12 months, Yellow, beyond that Red.",
+         "rght" : 27,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 26,
+         "weight" : 100,
+         "title" : "Age of most recent release"
+      },
+      "pk" : 70,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 39,
+         "parent" : 63,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: An upward trend of posts with positive sentiments compared with posts with negative sentiments indicates a growth of satisfied users as compared to dissatisfied users, which is preferred.",
+         "rght" : 137,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 136,
+         "weight" : 40,
+         "title" : "Upward trend of posts with positive sentiment as compared with posts with negative sentiment"
+      },
+      "pk" : 72,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 14,
+         "parent" : 60,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Posts by developers are indication of activity and at least 4 per month is good.",
+         "rght" : 143,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 142,
+         "weight" : 50,
+         "title" : "Number of posts per month"
+      },
+      "pk" : 73,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 15,
+         "parent" : 60,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: Weekly posts are preferred.",
+         "rght" : 145,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 144,
+         "weight" : 25,
+         "title" : "Shortest interval between blog posts"
+      },
+      "pk" : 74,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 16,
+         "parent" : 60,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: At least one post per week is preferred.",
+         "rght" : 147,
+         "tree_id" : 1,
+         "sibling_order" : 3,
+         "level" : 3,
+         "lft" : 146,
+         "weight" : 25,
+         "title" : "Longest interval between blog posts"
+      },
+      "pk" : 75,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 17,
+         "parent" : 61,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: At least 2 meetings in person per month is preferred.",
+         "rght" : 151,
+         "tree_id" : 1,
+         "sibling_order" : 0,
+         "level" : 3,
+         "lft" : 150,
+         "weight" : 100,
+         "title" : "Events per month"
+      },
+      "pk" : 76,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 30,
+         "parent" : 78,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "This could be zero depending on if the metric can be gathered.",
+         "rght" : 133,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 3,
+         "lft" : 132,
+         "weight" : 100,
+         "title" : "Download Frequency"
+      },
+      "pk" : 77,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : null,
+         "parent" : 29,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Downloads are not always made known. Sometimes it is known only on the main site and if the project is included in a distribution, the accuracy is reduced.",
+         "rght" : 134,
+         "tree_id" : 1,
+         "sibling_order" : 1,
+         "level" : 2,
+         "lft" : 131,
+         "weight" : 0,
+         "title" : "Downloads"
+      },
+      "pk" : 78,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "template_name" : "",
+         "algorithm" : 38,
+         "parent" : 63,
+         "colour" : "",
+         "time_based" : true,
+         "description" : "Rationale: A positive average sentiment shows that the majority of the users publicly posting are satisfied with the product, which is desirable, and vice versa.",
+         "rght" : 139,
+         "tree_id" : 1,
+         "sibling_order" : 2,
+         "level" : 3,
+         "lft" : 138,
+         "weight" : 60,
+         "title" : "Average sentiment over 7 days from the last update"
+      },
+      "pk" : 79,
+      "model" : "hmeter_frontend.metric"
+   },
+   {
+      "fields" : {
+         "red_score" : 0,
+         "ry_boundary" : 33.33,
+         "yellow_score" : 50,
+         "yg_boundary" : 66.67,
+         "green_score" : 100
+      },
+      "pk" : 1,
+      "model" : "hmeter_frontend.metricscoreconstants"
+   }
+]

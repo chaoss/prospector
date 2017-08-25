@@ -1,0 +1,251 @@
+@import "common.less";
+
+table.projects-listing {
+    width: 100%;
+    border-spacing: 0;
+    line-height: 1.4em;
+}
+
+col.project-number {
+    width: 5.5ex;
+}
+
+/* Column widths */
+col.metric {
+    width: 11%;
+}
+
+col.proj-start, col.last-activity {
+    width: 10%;
+}
+
+col.compare-btn {
+    width: 15ex;
+}
+
+
+/* Headings */
+table.projects-listing thead {
+    background-color: #ccc;
+}
+
+/* Curved borders for all rows */
+tr > *:first-child {
+    border-bottom-left-radius: 1ex;
+    border-top-left-radius: 1ex;
+}
+
+tr > *:last-child {
+    border-bottom-right-radius: 1ex;
+    border-top-right-radius: 1ex;
+}
+
+
+a#business-units-link {
+    float: left;
+}
+
+form.project-search {
+    float: right;
+    width: 33%;
+
+    @media (max-width: @screen-sm-max) {
+        width: 100%;
+    }
+
+    label {
+        .container;
+
+        span {
+            .make-sm-column (5);
+        }
+
+        input[type=search] {
+            .make-sm-column (7);
+            padding: 0 1ex !important;
+            height: auto;
+        }
+    }
+}
+
+/* Table counter */
+table.projects-listing {
+    counter-reset: projects 0;
+    table-layout: fixed;
+    clear: both;
+}
+
+table.projects-listing tbody tr.project > td:first-child:before {
+    content: counter(projects, decimal) ". ";
+    display: inline-block;
+    width: 5ex;
+    padding-left: 1ex;
+}
+
+td.project-name {
+    cursor: pointer;
+}
+
+td.project-name .caret {
+    border-top: @caret-width-base solid transparent;
+    border-bottom: @caret-width-base solid transparent;
+    border-left: @caret-width-base solid;
+}
+
+tr.expanded td.project-name .caret {
+    border-top: @caret-width-base solid;
+    border-right: @caret-width-base solid transparent;
+    border-left: @caret-width-base solid transparent;
+}
+
+table.projects-listing tbody tr.project {
+    counter-increment: projects;
+}
+
+tr.project:hover {
+    background-color: #eee;
+}
+
+/* text align in table columns */
+table.projects-listing th,
+table.projects-listing td {
+    text-align: center;
+}
+
+table.projects-listing th.project-name,
+table.projects-listing td.project-name,
+tr.description td {
+    text-align: left;
+}
+
+/* Sortable headers */
+th.tablesorter-header {
+    cursor: pointer;
+}
+
+.tablesorter-header .tablesorter-header-inner:after {
+    content: " ↕";
+}
+
+.tablesorter-header.tablesorter-headerDesc .tablesorter-header-inner:after {
+    content: " ↓";
+}
+
+.tablesorter-header.tablesorter-headerAsc .tablesorter-header-inner:after {
+    content: " ↑";
+}
+
+.tablesorter-header.sorter-false .tablesorter-header-inner:after,
+.tablesorter-header:first-child .tablesorter-header-inner:after,
+.tablesorter-header:last-child .tablesorter-header-inner:after {
+    content: "";
+}
+
+.tablesorter-header.sorter-false,
+.tablesorter-header:last-child {
+    cursor: default;
+}
+
+
+/* Paginator */
+.paginator:before {
+    content: "Pages: ";
+}
+
+.paginator {
+    float: right;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.paginator .pagecount {
+    display: inline;
+}
+
+.paginator .page {
+    display: inline;
+    cursor: pointer;
+    color: #676767;
+}
+
+.paginator .page:hover {
+    color: #aaa;
+}
+
+.paginator .current.page {
+    font-weight: bold;
+    cursor: default;
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+div.health-scorebar {
+    width: 80%;
+}
+
+table.projects-listing td.metric {
+    vertical-align: middle;
+}
+
+
+tr.expanded, tr.expanded:hover, tr.description {
+    background-color: #ddd;
+}
+
+tr.expanded td:first-child {
+    border-top-left-radius: 1ex;
+    border-bottom-left-radius: 0;
+}
+
+tr.expanded td:last-child {
+    border-top-right-radius: 1ex;
+    border-bottom-right-radius: 0;
+}
+
+.table tr.description > td {
+    border-bottom-left-radius: 1ex;
+    border-bottom-right-radius: 1ex;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-left: 7ex;
+}
+
+tr.spacer {
+    height: 0.5em;
+}
+
+
+/* Compare button stuff */
+table.projects-listing td.compare-btn {
+    text-align: right;
+}
+
+#compare-overlay {
+    border-color: #c00;
+    background-color: #E03127;
+    color: white;
+}
+
+#compare-overlay {
+    border-radius: 0.5em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0.5em;
+
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    right: 25%;
+    max-width: 60em;
+}
+
+#compare-overlay .compare-btn {
+    float: right;
+    margin-top: -2px;
+}
+
+section.business-unit {
+    border-bottom: 1px solid @page-header-border-color;
+    .clearfix();
+}

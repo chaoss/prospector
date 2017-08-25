@@ -1,0 +1,330 @@
+[
+   {
+      "fields" : {
+         "desc" : "",
+         "name" : "BugReporterRatio"
+      },
+      "pk" : 40,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "",
+         "name" : "MailingListPostRatioByParticipant"
+      },
+      "pk" : 41,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "",
+         "name" : "CommitRatioByParticipant"
+      },
+      "pk" : 42,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Committer demographic",
+         "name" : "CommitterDemographic"
+      },
+      "pk" : 1,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Ratio of commits by dominant domain name",
+         "name" : "CommitRatio"
+      },
+      "pk" : 2,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Ratio of mailing list posts by dominant domain name",
+         "name" : "MailingListPostRatio"
+      },
+      "pk" : 3,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Ratio of mailing list threads by dominant domain name",
+         "name" : "MailingListThreadRatio"
+      },
+      "pk" : 4,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Bug Reporter demographic",
+         "name" : "BugReporterDemographic"
+      },
+      "pk" : 5,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Ratio of bug reports by dominant domain name",
+         "name" : "BugReportDomainRatio"
+      },
+      "pk" : 6,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Number of IRC channels",
+         "name" : "IrcChannelsNumber"
+      },
+      "pk" : 7,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Frequency of IRC meetings",
+         "name" : "IrcMeetingFrequency"
+      },
+      "pk" : 8,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Average lines per IRC meeting",
+         "name" : "IrcMeetingAverageLines"
+      },
+      "pk" : 9,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Average participants per IRC meeting",
+         "name" : "IrcMeetingAverageParticipants"
+      },
+      "pk" : 10,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Unique email address domains among committers",
+         "name" : "CommitterUniqueDomains"
+      },
+      "pk" : 11,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Unique email address domains among mailing list posts",
+         "name" : "MailingListUniqueDomains"
+      },
+      "pk" : 12,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Unique email address domains among bug report participants",
+         "name" : "BugReportUniqueDomains"
+      },
+      "pk" : 13,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Number of blog posts per month",
+         "name" : "BlogPostFrequency"
+      },
+      "pk" : 14,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Shortest interval between blog posts",
+         "name" : "BlogPostMinInterval"
+      },
+      "pk" : 15,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Longest interval between blog posts",
+         "name" : "BlogPostMaxInterval"
+      },
+      "pk" : 16,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Events per month",
+         "name" : "EventFrequency"
+      },
+      "pk" : 17,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Longest interval between events",
+         "name" : "EventMaxInterval"
+      },
+      "pk" : 18,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has IRC Channels",
+         "name" : "HasIrcChannels"
+      },
+      "pk" : 19,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has mailing lists",
+         "name" : "HasMailingList"
+      },
+      "pk" : 20,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has project definition statement",
+         "name" : "HasDescription"
+      },
+      "pk" : 21,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has bug tracker",
+         "name" : "HasBugTracker"
+      },
+      "pk" : 22,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has blog",
+         "name" : "HasBlog"
+      },
+      "pk" : 23,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has governance model",
+         "name" : "HasGovernanceModel"
+      },
+      "pk" : 24,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has website",
+         "name" : "HasWebsite"
+      },
+      "pk" : 25,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Contributor License Agreement absent",
+         "name" : "CLAAbsent"
+      },
+      "pk" : 26,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has version control system repository",
+         "name" : "HasVcs"
+      },
+      "pk" : 27,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Has OSI approved license",
+         "name" : "HasOSIApprovedLicense"
+      },
+      "pk" : 28,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "CVEs per thousand lines of code",
+         "name" : "CVEsPerKLOC"
+      },
+      "pk" : 29,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Download Frequency",
+         "name" : "DownloadFrequency"
+      },
+      "pk" : 30,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Bugs per Line of Code",
+         "name" : "BugsPerKLOC"
+      },
+      "pk" : 32,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Time since last release",
+         "name" : "TimeSinceLastSeenRelease"
+      },
+      "pk" : 33,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Ratio of bugs opened to bugs closed",
+         "name" : "BugsClosedRatio"
+      },
+      "pk" : 34,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Google Trends shows an upwards trend",
+         "name" : "GoogleTrendsIsUpwards"
+      },
+      "pk" : 35,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Unique committers",
+         "name" : "CommitterCount"
+      },
+      "pk" : 36,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "Ratio of CVEs opened to CVEs closed",
+         "name" : "CVEsClosedRatio"
+      },
+      "pk" : 37,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "",
+         "name" : "JamiqAveragePostSentiment"
+      },
+      "pk" : 38,
+      "model" : "hmeter_frontend.metricalgorithm"
+   },
+   {
+      "fields" : {
+         "desc" : "",
+         "name" : "JamiqPositivePostsTrend"
+      },
+      "pk" : 39,
+      "model" : "hmeter_frontend.metricalgorithm"
+   }
+]

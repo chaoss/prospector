@@ -1,0 +1,44 @@
+{% load cachebuster metrics recurse %}
+
+{% block before_leaf_metrics %}{% endblock %}
+
+{% block leaf_metrics %}
+  {% for child in score.leaf_children %}
+    {% if forloop.first %}
+      Metric datapoints:
+      <ul>
+    {% endif %}
+    <li>
+      <span class="metric-description">
+        {% if not child.is_complete %}
+          <img class="warning-na-metric"
+               src="{% static 'warning-na-metric.png' %}"
+               alt="!"
+               title="Warning: Data not imported." />
+         {% endif %}
+         {{ child.metric.title }}:
+        </span>
+      <span class="{{ child.colour }}-score">
+        {{ child.raw_value|format_score }}{{ child|metric_unit }}
+      </span>
+      {% if child.metric.description %}
+        {{ child.metric.description|linebreaks }}
+      {% endif %}
+    </li>
+    {% if forloop.last %}
+      </ul>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block before_aggregate_metrics %}{% endblock %}
+
+{% block aggregate_metrics %}
+  {% for child in score.aggregate_children %}
+    {% recurse child %}
+  {% empty %}
+    <a href="#">Back to top</a>
+  {% endfor %}
+{% endblock %}
+
+{% block after_aggregate_metrics %}{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "hmeter_frontend/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/less"
+        href="{% static 'css/all-projects.less' %}" />
+{% endblock css %}
+
+{% block js %}
+  <script type="text/javascript" src="{% static 'js/external-links.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/jquery-icontains.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'js/all-projects-search.js' %}">
+  </script>
+{% endblock js %}
+{% block content %}
+  <section>
+    <h1>Red Hat Maintained Projects</h1>
+
+    <p>
+      This page lists all the projects that Red Hat is involved with. Please
+      inform us (via the "Leave Feedback" link above) of any additions or
+      changes.
+    </p>
+
+    <p>
+      The information is consolidated from:
+    </p>
+
+    <ol>
+      <li>
+        <a href="https://fedoraproject.org/wiki/Red_Hat_contributions">
+          https://fedoraproject.org/wiki/Red_Hat_contributions
+        </a>
+      </li>
+      <li>
+        <a href="http://community.redhat.com/software/">
+          http://community.redhat.com/software/
+        </a>
+      </li>
+      <li>
+        <a href="http://www.sourceware.org/projects.html">
+          http://www.sourceware.org/projects.html
+        </a>
+      </li>
+      <li>
+        <a href="https://developer.jboss.org/welcome">
+          https://developer.jboss.org/welcome
+        </a>
+      </li>
+    </ol>
+
+    <p>
+      Project names with a <i class="fa fa-external-link"></i> are projects that
+      Prospector currently does not monitor and clicking on the project name
+      will bring you to the project's website.
+    </p>
+
+    <form class="form search-form form-inline">
+      <input type="search" value="Search Projects"
+             class="form-control inactive" />
+    </form>
+
+    <ol>
+      {% for projectinfo in projects %}
+        <li>
+          {% if not projectinfo.external %}
+            <a href="{% url 'hmeter_frontend:project:detail' pk=projectinfo.id %}">
+              {{ projectinfo.name }}
+            </a>
+          {% else %}
+            <a href="{{ projectinfo.link }}" class="external">
+              {{ projectinfo.name }}
+            </a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+{% endblock content %}

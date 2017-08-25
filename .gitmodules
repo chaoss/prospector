@@ -1,0 +1,37 @@
+[submodule "libs/jquery-treeview"]
+	path = libs/jquery-treeview
+	url = git://github.com/jzaefferer/jquery-treeview.git
+[submodule "libs/django-dag-cte"]
+	path = libs/django-dag-cte
+	url = git://github.com/hyperair/django-dag.git
+[submodule "libs/jquery-ellipsis"]
+	path = libs/jquery-ellipsis
+	url = git://github.com/STAR-ZERO/jquery-ellipsis.git
+[submodule "libs/google-trends-csv-downloader"]
+	path = libs/google-trends-csv-downloader
+	url = git://github.com/hyperair/google-trends-csv-downloader.git
+[submodule "libs/jquery.tablesorter"]
+	path = libs/jquery.tablesorter
+	url = git://github.com/hyperair/tablesorter.git
+[submodule "libs/jquery-sortable"]
+	path = libs/jquery-sortable
+	url = git://github.com/johnny/jquery-sortable
+[submodule "libs/django-preferences"]
+	path = libs/django-preferences
+	url = git://github.com/hyperair/django-preferences
+[submodule "libs/django-js-reverse"]
+	path = libs/django-js-reverse
+	url = git://github.com/hyperair/django-js-reverse
+[submodule "libs/django-medusa"]
+	path = libs/django-medusa
+	url = git://github.com/hyperair/django-medusa
+[submodule "libs/python-mantisbt-api"]
+	path = libs/python-mantisbt-api
+	url = git://github.com/hyperair/python-mantisbt-api
+	branch = develop
+[submodule "libs/bootstrap"]
+	path = libs/bootstrap
+	url = git://github.com/twbs/bootstrap
+[submodule "libs/bootstrap-slider"]
+	path = libs/bootstrap-slider
+	url = git://github.com/seiyria/bootstrap-slider

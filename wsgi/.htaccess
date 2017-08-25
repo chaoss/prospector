@@ -1,0 +1,9 @@
+DirectoryIndex index.html index.json
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !.*project/\+compare/.*
+RewriteCond %{REQUEST_URI} !.*admin/.*
+RewriteCond %{REQUEST_URI} !.*jsreverse.*
+RewriteCond %{REQUEST_URI} !.*feedback
+RewriteCond %{REQUEST_URI} !.*media.*
+RewriteRule ^application/(.+)$ static/generated/$1

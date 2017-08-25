@@ -1,0 +1,12 @@
+{% extends "hmeter_frontend/project/fragments/detail/sections/base.html" %}
+
+{% block before_leaf_metrics %}
+  <div class="graph-container">
+    <div class="graph" id="blogposts_freq_graph"></div>
+    <div class="graph" id="cumulative_blogposts_graph"></div>
+  </div>
+
+  <script type="text/javascript">
+    {% include "hmeter_frontend/project/fragments/detail/sections/blog-graph.js" %}
+  </script>
+{% endblock %}

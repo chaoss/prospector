@@ -1,0 +1,76 @@
+<table class="projects-listing table">
+  <colgroup>
+    <col class="project-number" />
+    <col class="project-name" />
+
+    {% for metric in l1_metrics %}
+      <col class="metric" data-metric-id="{{ metric.id }}" />
+    {% endfor %}
+
+    <col class="proj-start" />
+    <col class="last-activity" />
+    <col class="compare-btn" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th></th> <!-- numbers -->
+
+      <th class="sortable project-name">Project Name</th>
+
+      {% for metric in l1_metrics %}
+        <th class="sortable" data-sorter="health-bar">{{ metric.title }}</th>
+      {% endfor %}
+
+      <th class="sortable" data-sorter="timestamp">Proj Start</th>
+      <th class="sortable" data-sorter="timestamp">Last Activity</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for proj in projects %}
+      <tr class="project" data-project-id="{{ proj.id }}">
+        <td></td>
+
+        <td class="ellipsize project-name">
+          <span class="caret"></span>
+          <a href="{% url 'hmeter_frontend:project:detail' pk=proj.id %}"
+             class="project-detail-link">
+             {{ proj.name }}
+          </a>
+        </td>
+
+        {% for mc in proj.l1_scores %}
+          <td class="metric" data-health-score="{{ mc.score }}">
+            <div class="health-scorebar"
+                 data-health-score="{{ mc.score }}">
+            </div>
+          </td>
+        {% endfor %}
+
+        <td class="ellipsize"
+            data-timestamp="{{ proj.smart_start_date|date:"U"}}">
+            {% if proj.smart_start_date %}
+              {{ proj.smart_start_date|date:"d-M-Y" }}
+            {% else %}
+              N/A
+            {% endif %}
+        </td>
+
+        <td class="ellipsize"
+            data-timestamp="{{ proj.last_activity|date:"U"}}">
+          {% if proj.last_activity %}
+            {{ proj.last_activity|date:"d-M-Y" }}
+          {% else %}
+            N/A
+          {% endif %}
+        </td>
+
+        <td class="ellipsize compare-btn">
+          <button href="#" class="btn btn-xs btn-default compare-btn"
+                  data-toggle="button">Compare</button>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

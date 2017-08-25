@@ -1,0 +1,87 @@
+@import "bootstrap/bootstrap.less";
+@import "bootstrap/theme.less";
+
+@line-height-base: 1.6180339887;
+
+#redhat-logo {
+    height: 2em;
+    display: inline-block;
+    margin-right: (@grid-gutter-width / 2 - 8px);
+    vertical-align: text-bottom;
+}
+
+.navbar-brand {
+    margin-top: 0;
+    margin-bottom: 7px;
+
+    span {
+        display: inline-block;
+        border-left: 2px solid @gray-light;
+        padding-left: (@grid-gutter-width / 2);
+    }
+}
+
+a.navbar-brand + .navbar-toggle {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.navbar-nav > li.btn-migration > a {
+    .text-danger;
+    font-weight: bold;
+}
+
+main > section {
+    > h1 {
+        &:extend(.page-header);
+    }
+
+    > section {
+        > h1 {
+            &:extend(.h2);
+        }
+
+        > section {
+            > h1 {
+                &:extend(.h3);
+            }
+
+            > section {
+                > h1 {
+                    &:extend(.h4);
+                }
+            }
+        }
+    }
+}
+
+.health-scorebar.progress {
+    height: 0.6em;
+    margin: 0;
+}
+
+#feedback-modal {
+    #feedback-form {
+        label {
+            .make-sm-column (2);
+        }
+
+        label + * {
+            .make-sm-column (10);
+        }
+    }
+
+    i.fa.fa-spinner {
+        display: none;
+    }
+
+    .in-progress i.fa.fa-spinner {
+        display: inline-block;
+    }
+}
+
+.ellipsize {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

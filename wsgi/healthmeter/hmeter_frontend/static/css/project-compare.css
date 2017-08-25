@@ -1,0 +1,130 @@
+body.dragging {
+    cursor: move !important;
+}
+
+table {
+    margin-top: 6px;
+    table-layout: fixed;
+    border-spacing: 0;
+    min-width: 100%;
+}
+
+/* column width */
+.metric {
+    min-width: 40ex;
+}
+
+th.project {
+    min-width: 15ex;
+    text-align: center;
+}
+
+colgroup.project-columns {
+    width: 60%;
+}
+
+/* project headers */
+th.placeholder {
+    position: relative;
+    display: block;
+    width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+th.placeholder:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top-color: red;
+    top: -6px;
+    left: -6px;
+    border-bottom: none;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 999;
+}
+
+/* paddings for metric levels */
+tr[data-level="0"] > td.metric {
+    padding-left: 0;
+}
+
+tr[data-level="1"] > td.metric {
+    padding-left: 2em;
+}
+
+tr[data-level="2"] > td.metric {
+    padding-left: 4em;
+}
+
+tr[data-level="3"] > td.metric {
+    padding-left: 6em;
+}
+
+tr[data-level="4"] > td.metric {
+    padding-left: 8em;
+}
+
+td {
+    text-align: center;
+    padding: 0 2em;
+}
+
+td.metric {
+    text-align: left;
+}
+
+tbody.metric-scorebars td:first-child {
+    padding: 0;
+}
+
+tr:hover {
+    background-color: #eee;
+}
+
+td:first-child, th:first-child, th:first-child + th[data-project-id] {
+    border-top-left-radius: 1ex;
+    border-bottom-left-radius: 1ex;
+}
+
+td:last-child, th:last-child {
+    border-top-right-radius: 1ex;
+    border-bottom-right-radius: 1ex;
+}
+
+/* background colours */
+tr th+th {
+    background-color: #ccc;
+}
+
+tbody.graph-rows tr:nth-child(odd) {
+    background-color: #eee;
+}
+
+tbody.metric-rows tr.level1 {
+    background-color: #eee;
+}
+
+.health-scorebar {
+    width: 100%;
+}
+
+/* expandable metrics */
+tr.collapsible {
+    cursor: pointer;
+}
+
+tr.collapsible > td:first-child:before {
+    content: "▾ ";
+}
+
+tr.collapsible.collapsed > td:first-child:before {
+    content: "▶ ";
+}

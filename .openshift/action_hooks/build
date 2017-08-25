@@ -1,0 +1,95 @@
+# Copyright 2017 Red Hat, Inc.
+# License: GPLv3 or any later version
+
+#!/bin/bash
+# Script cannibalized from https://github.com/zfdang/memcached-in-openshift to
+# install memcached into $OPENSHIFT_DATA_DIR
+
+optdir="$OPENSHIFT_DATA_DIR/opt"
+
+install_pkg() {
+    local pkg="$1" \
+          version="$2" \
+          url_template="$3" \
+          from_source="$4"
+    local builddir="$OPENSHIFT_TMP_DIR/$pkg-$version" \
+          prefix="$optdir/$pkg"
+
+    shift 4   # everything else is to be passed to configure
+
+    if [ -d "$prefix" ]; then
+        echo "$prefix exists. Skipping compilation..."
+        return 0
+    fi
+
+    (
+        set -e        # Die on error
+
+        echo "Cleaning up $builddir if it exists"
+        rm -rf "$builddir"
+
+        echo "Creating $builddir"
+        mkdir "$builddir"
+
+        eval "local url=$url_template"
+        local tarball="$pkg-$version.tar.gz"
+
+        echo "Downloading $pkg from $url to $OPENSHIFT_TMP_DIR/$tarball"
+
+        cd "$OPENSHIFT_TMP_DIR"
+        curl -L -o "$tarball" "$url"
+
+        echo "Extracting $tarball"
+        tar -C "$builddir" --strip-components=1 -xzvf "$pkg-$version.tar.gz"
+
+        if [ "$from_source" = y ]; then
+            echo "Compiling"
+            cd "$builddir"
+
+            sh configure --prefix="$prefix" "$@"
+            make -j$(grep -c ^processor /proc/cpuinfo)
+
+            echo "Installing into $prefix"
+            make install
+
+        else
+            echo "Not from_source, so directly moving into $prefix"
+            mv -T "$builddir" "$prefix"
+        fi
+    )
+
+    ret=$?
+    if [ $ret -eq 0 ]; then
+        echo "Successfully installed $pkg-$version"
+    else
+        echo "Installation of $pkg-$version failed"
+    fi
+
+    return $ret
+}
+
+mkdir -p $optdir
+
+install_pkg \
+    libevent \
+    2.0.22 \
+    'https://sourceforge.net/projects/levent/files/libevent/$pkg-2.0/libevent-$version-stable.tar.gz' \
+    y
+
+install_pkg \
+    memcached \
+    1.4.24 \
+    'http://www.memcached.org/files/$pkg-$version.tar.gz' \
+    y \
+    --with-libevent=$optdir/libevent
+
+install_pkg \
+    iojs \
+    3.0.0 \
+    'https://iojs.org/dist/v$version/$pkg-v$version-linux-x64.tar.gz' \
+    n
+
+lessdir="$optdir/less"
+mkdir -p "$lessdir"
+cd "$lessdir"
+HOME="$lessdir" $optdir/iojs/bin/npm install less
