@@ -18,10 +18,6 @@ from healthmeter.hmeter_frontend import models
 from healthmeter.btinfo import models as btmodels
 from healthmeter.bloginfo import models as blogmodels
 from healthmeter.eventinfo import models as eventmodels
-from healthmeter.gtrendsinfo import models as gtrendsmodels
-from healthmeter.ircinfo import models as ircmodels
-from healthmeter.jamiqinfo import models as jamiqmodels
-from healthmeter.microbloginfo import models as microblogmodels
 from healthmeter.mlinfo import models as mlmodels
 from healthmeter.projectinfo import models as projectmodels
 from healthmeter.vcsinfo import models as vcsmodels
@@ -212,37 +208,11 @@ class BugReporterDataView(ContributorDataView, DomainFilterMixin):
             bug__tracker_info__projects__in=self.projects))
 
 
-class IrcDataView(GraphDataView):
-    def get_data(self):
-        meetings = ircmodels.Meeting.objects \
-            .filter(channel__projects__in=self.projects)
-        meetings = meetings.with_msg_count().with_participant_count()
-
-        data = {}
-        data['irc_lines_per_meeting_series'] = [
-            [self.get_datestamp(x.time_start), int(x.msg_count)]
-            for x in meetings]
-
-        data['irc_logins_per_meeting_series'] = [
-            [self.get_datestamp(x.time_start), int(x.participant_count)]
-            for x in meetings]
-
-        return data
-
-
 class BlogDataView(FrequencyDataView):
     series_name = 'blogposts_per_day_series'
 
     def get_queryset(self):
         return blogmodels.Post.objects.filter(blog__projects__in=self.projects)
-
-
-class MicroblogDataView(FrequencyDataView):
-    series_name = 'microblogposts_per_day_series'
-
-    def get_queryset(self):
-        return microblogmodels.MicroblogPost.objects.filter(
-            microblog__projects__in=self.projects)
 
 
 class EventDataView(GraphDataView):
@@ -264,13 +234,6 @@ class EventDataView(GraphDataView):
             for event in events]
         data['event_labels'] = [event.desc for event in events]
 
-        meetings = ircmodels.Meeting.objects \
-            .filter(channel__projects__in=self.projects)
-        data['meeting_series'] = [
-            [[self.get_datestamp(meeting.time_start.date()), "-Infinity"],
-             [self.get_datestamp(meeting.time_end.date()), "Infinity"]]
-            for meeting in meetings]
-
         blog_posts = blogmodels.Post.objects \
             .filter(blog__projects__in=self.projects)
         data['blog_series'] = [
@@ -281,54 +244,6 @@ class EventDataView(GraphDataView):
         data['blog_labels'] = [blog_post.title for blog_post in blog_posts]
 
         return data
-
-
-class GTrendsDataView(GraphDataView):
-    @property
-    def all_trends(self):
-        return gtrendsmodels.Query.objects.filter(project__in=self.projects)
-
-    def get_data(self):
-        series = []
-        for trend in self.all_trends:
-            keyword = trend.keyword
-            datapoints = [(self.get_datestamp(d.start),
-                           d.count) for d in trend.datapoints.all()]
-
-            series.append({'label': keyword,
-                           'series': datapoints})
-
-        return series
-
-
-class JamiqDataView(GraphDataView):
-    @property
-    def datapoints(self):
-        return jamiqmodels.DataPoint \
-            .objects \
-            .filter(topic__projects__in=self.projects) \
-            .aggregate_by_date() \
-            .order_by('datestamp')
-
-    def make_series(self, datapoints, attr):
-        result = []
-
-        for dp in datapoints:
-            value = dp[attr]
-            datestamp = dp['datestamp']
-
-            result.append((self.get_datestamp(datestamp), value))
-
-        return result
-
-    def get_data(self):
-        datapoints = self.datapoints
-        series = {}
-
-        for i in ('positive', 'neutral', 'negative'):
-            series[i] = self.make_series(datapoints, i)
-
-        return series
 
 
 class MetricDataView(GraphDataView):

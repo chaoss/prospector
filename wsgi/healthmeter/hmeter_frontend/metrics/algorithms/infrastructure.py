@@ -63,14 +63,6 @@ class HasBugTracker(NullChecker, MetricAlgorithm):
 
 
 @metric
-class HasIrcChannels(NullChecker, MetricAlgorithm):
-    normalizer = BoolNormalizer()
-
-    def get_raw_value(self):
-        return self.project.all_irc_channels.exists()
-
-
-@metric
 class HasGovernanceModel(NullChecker, MetricAlgorithm):
     normalizer = BoolNormalizer()
 

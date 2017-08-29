@@ -45,24 +45,11 @@ project_urlpatterns = patterns(
         views.project.BugReporterDataView.as_view(),
         name="btreporterdata"),
 
-    url(r'^(?P<id>\d+)/irc/$', views.project.IrcDataView.as_view(),
-        name="ircdata"),
-
     url(r'^(?P<id>\d+)/blogs/$', views.project.BlogDataView.as_view(),
         name="blogdata"),
 
-    url(r'^(?P<id>\d+)/microblogs/$',
-        views.project.MicroblogDataView.as_view(),
-        name="microblogdata"),
-
     url(r'^(?P<id>\d+)/events/$', views.project.EventDataView.as_view(),
         name="eventdata"),
-
-    url(r'^(?P<id>\d+)/gtrends/$', views.project.GTrendsDataView.as_view(),
-        name="gtrendsdata"),
-
-    url(r'^(?P<id>\d+)/jamiq/$', views.project.JamiqDataView.as_view(),
-        name="jamiqdata"),
 
     url(r'(?P<id>\d+)/metric/$', views.project.MetricDataView.as_view(),
         name="metricdata"),

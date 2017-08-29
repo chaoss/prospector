@@ -21,10 +21,7 @@ class ProblematicProjects(ListView):
                 (project.all_vcs_repositories, 'VCS commits', {}),
                 (project.all_bug_trackers, 'bug reports', {}),
                 (project.all_mailing_lists, 'mailing list posts', {}),
-                (project.all_irc_channels, 'irc meetings',
-                 {'meeting_logs_url__isnull': False}),
                 (project.all_blogs, 'blogs', {}),
-                (project.all_jamiqtopics, 'JamiQ topics', {}),
             )
 
             for res, desc, kwargs in resources:

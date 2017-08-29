@@ -3,4 +3,4 @@
 
 from .common import BugTrackerImporter
 from . import (bugzilla_importer, jira_importer, github_importer,
-               launchpad_importer, mantis_importer, redmine_importer)
+               redmine_importer)

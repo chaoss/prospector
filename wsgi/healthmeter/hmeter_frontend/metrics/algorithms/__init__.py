@@ -4,8 +4,6 @@
 import bugs
 import events
 import infrastructure
-import irc
-import jamiq
 import mailing_list
 import publicity
 import quality

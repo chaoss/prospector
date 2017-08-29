@@ -17,7 +17,6 @@ from ...utils.cache import (djcached, cached_property,
                             project_cache_key_template)
 
 from healthmeter.btinfo import models as btmodels
-from healthmeter.cveinfo import models as cvemodels
 from healthmeter.mlinfo import models as mlmodels
 from healthmeter.vcsinfo import models as vcsmodels
 
@@ -70,16 +69,8 @@ class ProjectDetail(DetailView):
                             .filter(mailing_lists__in=self.mailing_lists)
 
     @cached_property
-    def irc_channels(self):
-        return self.object.all_irc_channels
-
-    @cached_property
     def blogs(self):
         return self.object.all_blogs
-
-    @cached_property
-    def microblogs(self):
-        return self.object.all_microblogs
 
     @cached_property
     def limits(self):
@@ -220,22 +211,8 @@ class ProjectDetail(DetailView):
         self.data[basename + 's'] = items
         self.data[basename + '_count'] = len(items)
 
-    def populate_ircdata(self):
-        self._populate_listdata_with_count('irc_channel', self.irc_channels)
-
     def populate_blogdata(self):
         self._populate_listdata_with_count('blog', self.blogs)
-
-    def populate_microblogdata(self):
-        self._populate_listdata_with_count('microblog', self.microblogs)
-
-    def populate_cvedata(self):
-        cpeproducts = self.object.all_cpeproducts
-        self.data['cpe_product_names'] = list(cpeproducts)
-
-        cves = cvemodels.CVE.objects.filter(products__in=cpeproducts)
-        self.data['cve_count_period'] = self.gen_periodic_data(
-            lambda limit: cves.filter(published_datetime__gte=limit).count())
 
     def populate_metricinfo(self):
         score_constants = get_score_constants()
@@ -266,9 +243,6 @@ class ProjectDetail(DetailView):
         self.populate_mldata()
         self.populate_miscdata()
         self.populate_blogdata()
-        self.populate_microblogdata()
-        self.populate_cvedata()
-        self.populate_ircdata()
         self.populate_metricinfo()
 
         return self.data

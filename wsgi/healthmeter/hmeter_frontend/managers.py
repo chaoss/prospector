@@ -15,7 +15,6 @@ from healthmeter.vcsinfo import models as vcsmodels
 from healthmeter.mlinfo import models as mlmodels
 from healthmeter.btinfo import models as btmodels
 from healthmeter.bloginfo import models as blogmodels
-from healthmeter.ircinfo import models as ircmodels
 
 
 DateData = collections.namedtuple('DateData',
@@ -38,8 +37,7 @@ class ProjectQuerySet(QuerySet):
             (vcsmodels.Commit, 'repository__project'),
             (mlmodels.Post, 'mailing_lists__projects'),
             (btmodels.Comment, 'bug__tracker_info__projects'),
-            (blogmodels.Post, 'blog__projects'),
-            (ircmodels.Message, 'channel__projects')
+            (blogmodels.Post, 'blog__projects')
         )
 
         trees = [proj.tree_id for proj in self]

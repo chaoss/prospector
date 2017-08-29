@@ -3,13 +3,12 @@
 
 from django.db.models import Sum
 import itertools
-import healthmeter.cveinfo.models as cvemodels
 from healthmeter.hmeter_frontend import models
 import healthmeter.vcsinfo.models as vcsmodels
 
 
 from ..lookup import metric
-from .mixins import RatioMetric, TimeBasedMetric, UnimplementedMetric
+from .mixins import RatioMetric
 from .normalizers import ClampingNormalizer
 from .vcs import VCSMetric
 from .bugs import BugReportMetric
@@ -72,34 +71,3 @@ class BugsClosedRatio(RatioMetric, BugReportMetric):
     def get_numerator(self):
         return self.first_comments.filter(bug__close_date__isnull=False) \
                                   .count()
-
-
-class CVEMetric(TimeBasedMetric):
-    @property
-    def cpes(self):
-        return cvemodels.Product.objects.filter(project__in=self.projects)
-
-    @property
-    def cves(self):
-        qs = cvemodels.CVE.objects.filter(products__in=self.cpes)
-        return self.clamp_timestamp(qs, 'published_datetime')
-
-
-@metric
-class CVEsPerKLOC(RatioMetric, CVEMetric, SlocMetric):
-    normalizer = ClampingNormalizer(green_threshold=5.0, yellow_threshold=10.0)
-
-    unit = 'CVE per KLOC'
-    unit_plural = 'CVEs per KLOC'
-
-    def get_denominator(self):
-        sloc = self.sloc
-        return sloc if sloc is not None else None
-
-    def get_numerator(self):
-        return self.cves.count() or None
-
-
-@metric
-class CVEsClosedRatio(UnimplementedMetric):
-    pass

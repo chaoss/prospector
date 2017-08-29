@@ -23,13 +23,8 @@ from healthmeter.projectinfo import models as projectmodels
 from healthmeter.vcsinfo import models as vcsmodels
 from healthmeter.mlinfo import models as mlmodels
 from healthmeter.btinfo import models as btmodels
-from healthmeter.cveinfo import models as cvemodels
-from healthmeter.gtrendsinfo import models as gtrendsmodels
-from healthmeter.jamiqinfo import models as jamiqmodels
-from healthmeter.ircinfo import models as ircmodels
 from healthmeter.eventinfo import models as eventmodels
 from healthmeter.bloginfo import models as blogmodels
-from healthmeter.microbloginfo import models as microblogmodels
 
 from healthmeter.managers import (ProxyTreeManager, QuerySetManager,
                                   get_natural_key_manager)
@@ -94,25 +89,8 @@ class Project(projectmodels.Project):
             projects__in=self.all_projects)
 
     @property
-    def all_irc_channels(self):
-        return ircmodels.Channel.objects.filter(projects__in=self.all_projects)
-
-    @property
     def all_blogs(self):
         return blogmodels.Blog.objects.filter(projects__in=self.all_projects)
-
-    @property
-    def all_microblogs(self):
-        return microblogmodels.Microblog.objects.filter(
-            projects__in=self.all_projects)
-
-    @property
-    def all_cpeproducts(self):
-        return cvemodels.Product.objects.filter(project__in=self.all_projects)
-
-    @property
-    def all_jamiqtopics(self):
-        return jamiqmodels.Topic.objects.filter(projects__in=self.all_projects)
 
     @cached_property
     @djcached_by_project('start_date', 24 * 3600)
@@ -139,9 +117,7 @@ class Project(projectmodels.Project):
         querysets = (self.all_vcs_repositories,
                      self.all_bug_trackers,
                      self.all_mailing_lists,
-                     self.all_irc_channels,
-                     self.all_blogs,
-                     self.all_jamiqtopics)
+                     self.all_blogs)
 
         last_updated_dates = (qs.aggregate(lu=models.Max('last_updated'))['lu']
                               for qs in querysets)
@@ -185,11 +161,6 @@ class Project(projectmodels.Project):
 
         timestamp = blogmodels.Post.objects \
             .filter(blog__projects__in=projects, **extra_args) \
-            .aggregate(timestamp=models.Max('timestamp'))['timestamp']
-        update_timestamp(timestamp)
-
-        timestamp = ircmodels.Message.objects \
-            .filter(channel__projects__in=projects, **extra_args) \
             .aggregate(timestamp=models.Max('timestamp'))['timestamp']
         update_timestamp(timestamp)
 
