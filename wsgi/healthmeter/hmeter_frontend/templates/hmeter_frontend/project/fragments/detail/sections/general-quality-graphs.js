@@ -1,5 +1,3 @@
-{% load url from future %}
-
 $(function ()
   {
      $.when (window.graphready_deferred,
