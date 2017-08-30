@@ -18,14 +18,14 @@ class QuerySetManager(models.Manager):
         class QuerySet(models.query.QuerySet):
             ...
     """
-    def get_query_set(self):
+    def get_queryset(self):
         return self.model.QuerySet(self.model)
 
     def __getattr__(self, name, *args):
         if name.startswith('_'):
             raise AttributeError
 
-        return getattr(self.get_query_set(), name, *args)
+        return getattr(self.get_queryset(), name, *args)
 
 
 class ProxyTreeManager(mptt.managers.TreeManager):
