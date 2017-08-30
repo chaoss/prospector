@@ -11,7 +11,7 @@ from .models import *
 class TestPurpose(TestCase):
     def test_unicode(self):
         p = Purpose.objects.create(name='user')
-        self.assertEqual(unicode(p), u'user')
+        self.assertEqual(p, u'user')
 
     def test_duplicate(self):
         p = Purpose.objects.create(name='user')
@@ -21,11 +21,11 @@ class TestPurpose(TestCase):
 
 
 class TestMailingList(TransactionTestCase):
-    def test_unicode(self):
+    def test_str(self):
         m = MailingList.objects.create(posting_address='test@example.com',
                                        archive_url='http://example.com')
 
-        self.assertEqual(unicode(m), 'test@example.com')
+        self.assertEqual(m, 'test@example.com')
 
     def test_duplicate(self):
         posting_address = 'test@example.com'
@@ -69,7 +69,7 @@ class TestPost(TransactionTestCase):
     def test_unicode(self):
         msgid = 'abc'
         post = self._get_post(msgid)
-        self.assertEqual(unicode(post), msgid)
+        self.assertEqual(post, msgid)
 
     def test_duplicate(self):
         msgid = 'abc'

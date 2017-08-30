@@ -33,7 +33,7 @@ class RedmineImporter(BugTrackerImporter):
     }
 
     def __init__(self, bt_info):
-        super(RedmineImporter, self).__init__(bt_info)
+        super().__init__(bt_info)
 
         bt = bt_info.bug_tracker
         self.client = redmine.Redmine(bt.baseurl,

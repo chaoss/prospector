@@ -17,17 +17,17 @@ def format_score(value):
     if value is None:
         return "N/A"
 
-    if type(value) is bool:
-        return u'\u2714' if value else u'\u2718'
+    if isinstance(value, bool):
+        return '\u2714' if value else '\u2718'
 
-    elif type(value) is int:
+    elif isinstance(value, int):
         return intcomma(value)
 
     f = floatformat(value, 2)
     if f:
         return f
 
-    return unicode(value)
+    return value
 
 
 @register.filter

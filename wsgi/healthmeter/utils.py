@@ -94,7 +94,7 @@ def pairwise(iterable):
     a, b = itertools.tee(iterable)
     a = itertools.chain((None,), a)
     b = itertools.chain(b, (None,))
-    return itertools.izip(a, b)
+    return zip(a, b)
 
 
 class ProxyObject(object):
@@ -112,7 +112,7 @@ class ProxyObject(object):
         args = [repr(self.__origobj)]
         args.extend(
             '{0}={1}'.format(str(key), repr(value))
-            for key, value in self.__dict__.iteritems()
+            for key, value in self.__dict__.items()
             if key != '_ProxyObject__origobj'
         )
 

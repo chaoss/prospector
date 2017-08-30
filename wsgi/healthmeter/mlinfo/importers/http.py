@@ -5,7 +5,8 @@ import logging
 import os
 import re
 import shutil
-import urllib2
+import urllib.parse
+import urllib.request
 
 from healthmeter.hmeter_frontend.utils import (get_decompressed_fileobj,
                                                LinkScraper)
@@ -66,8 +67,8 @@ class HttpImporter(MBoxImporter):
         """
 
         if self.username:
-            postdata = urllib.urlencode({'username': self.username,
-                                         'password': self.password})
+            postdata = urllib.parse.urlencode({'username': self.username,
+                                               'password': self.password})
 
         else:
             postdata = None
@@ -81,8 +82,8 @@ class HttpImporter(MBoxImporter):
 
             logger.info("Downloading [%s]", link)
             try:
-                request = urllib2.Request(link, postdata)
-                response = urllib2.urlopen(request)
+                request = urllib.request.Request(link, postdata)
+                response = urllib.request.urlopen(request)
 
                 filename = os.path.basename(link)
                 mbox_path = os.path.join(save_path, filename)
@@ -95,9 +96,9 @@ class HttpImporter(MBoxImporter):
                 mbox_paths.append(mbox_path)
 
             except:
-                logger.warn("Could not download [%s]. Skipping...",
-                            link,
-                            exc_info=True)
+                logger.warning("Could not download [%s]. Skipping...",
+                               link,
+                               exc_info=True)
 
         return mbox_paths
 

@@ -40,18 +40,18 @@ class RSSImporter(BlogImporter):
 
                 else:
                     timestamp = item[field]
-                    logger.warn("No parsed timestamp, from feedparser, "
-                                "falling back on dateutil.parser: [%s]",
-                                timestamp)
+                    logger.warning("No parsed timestamp, from feedparser, "
+                                   "falling back on dateutil.parser: [%s]",
+                                   timestamp)
 
                     try:
                         return dparser.parse(timestamp)
                     except ValueError:
-                        logger.warn("Invalid timestamp!", field)
+                        logger.warning("Invalid %s timestamp!", field)
             except KeyError:
                 pass
 
-        logger.warn("Could not find timestamp, falling back to current time.")
+        logger.warning("Could not find timestamp, falling back to current time.")
         return RSSImporter.parse_date(datetime.datetime.utcnow())
 
     @staticmethod

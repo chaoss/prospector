@@ -19,7 +19,7 @@ class BugTrackerImporter(ImporterBase):
         return bt_info.bug_tracker.bt_type.name
 
     def __init__(self, bt_info):
-        super(BugTrackerImporter, self).__init__(bt_info)
+        super().__init__(bt_info)
         self.severities = {}
 
         for severity in Severity.objects.all():
@@ -38,5 +38,5 @@ class BugTrackerImporter(ImporterBase):
             return self.severities[self.severity_level_map[severity]]
 
         except KeyError:
-            logger.warn("Unknown severity [%s]", severity)
+            logger.warning("Unknown severity [%s]", severity)
             return None

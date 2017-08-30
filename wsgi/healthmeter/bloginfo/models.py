@@ -19,7 +19,7 @@ class Blog(models.Model):
 
     objects = get_natural_key_manager('rss_url')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.url
 
 
@@ -34,5 +34,5 @@ class Post(models.Model):
     class Meta:
         unique_together = ('blog', 'guid')
 
-    def __unicode__(self):
-        return u'%s on %s' % (self.guid, self.blog)
+    def __str__(self):
+        return '%s on %s' % (self.guid, self.blog)

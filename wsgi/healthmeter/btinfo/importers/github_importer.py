@@ -22,7 +22,7 @@ class GithubError(Exception):
     def __init__(self, message, status_code):
         self.message = message
         self.status_code = status_code
-        super(GithubError, self).__init__(self, message, status_code)
+        super().__init__(self, message, status_code)
 
 
 class GithubImporter(BugTrackerImporter):
@@ -161,12 +161,12 @@ class GithubImporter(BugTrackerImporter):
                         comment)
 
             if not created:
-                for key, value in extrafields.iteritems():
+                for key, value in extrafields.items():
                     oldvalue = getattr(comment, key)
                     if oldvalue != value:
-                        logger.warn("Updating field [%s] for comment [%s] "
-                                    "(%s -> %s)", key, comment,
-                                    oldvalue, value)
+                        logger.warning("Updating field [%s] for comment [%s] "
+                                       "(%s -> %s)", key, comment,
+                                       oldvalue, value)
                         setattr(comment, key, value)
                         self.record_timestamp(comment.timestamp)
 

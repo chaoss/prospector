@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)  # pylint: disable-msg=C0103
 
 class GitImporter(DVcsImporter):
     def __init__(self, dj_repo):
-        super(GitImporter, self).__init__(dj_repo)
+        super().__init__(dj_repo)
         self._init_repository()
         self.cached_line_count = {}
 
@@ -43,8 +43,8 @@ class GitImporter(DVcsImporter):
 
         except dulwich.repo.NotGitRepository:
             if os.path.exists(self.repo_path):
-                logger.warn("[%s] is not a git repository! Purging..",
-                            self.repo_path)
+                logger.warning("[%s] is not a git repository! Purging..",
+                               self.repo_path)
 
                 if os.path.isdir(self.repo_path):
                     shutil.rmtree(self.repo_path)
@@ -115,7 +115,7 @@ class GitImporter(DVcsImporter):
                     date = self._get_tag_date(tag)
                     yield tag, date
                 except:
-                    logger.warn("Could not get date of tag [%s]", tag)
+                    logger.warning("Could not get date of tag [%s]", tag)
 
         return list(tag_generator())
 

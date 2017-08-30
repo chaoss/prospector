@@ -24,7 +24,6 @@ install_requires = [
     'python-memcached',
     'jira>=0.13',
     'requests>=1.0',
-    'simplejson',
     'bzr',
     'django-cachebuster',
     'jsonfield',

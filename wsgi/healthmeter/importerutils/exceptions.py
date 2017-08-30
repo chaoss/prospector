@@ -10,7 +10,7 @@ class DuplicateImporter(Exception):
     - backend_name: name of duplicate backend
     """
     def __init__(self, cls, backend_name):
-        super(DuplicateImporter, self).__init__(cls, backend_name)
+        super().__init__(backend_name)
         self.cls = cls
         self.backend_name = backend_name
 
@@ -25,6 +25,6 @@ class UnknownImporter(Exception):
     - backend_name: name of missing backend
     """
     def __init__(self, cls, backend_name):
-        super(UnknownImporter, self).__init__(cls, backend_name)
+        super().__init__(backend_name)
         self.cls = cls
         self.backend_name = backend_name

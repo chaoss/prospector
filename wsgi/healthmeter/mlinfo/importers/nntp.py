@@ -3,7 +3,7 @@
 
 import nntplib
 import re
-import urlparse
+import urllib.parse
 from email.parser import HeaderParser
 
 from .importer import MailImporter, Message
@@ -26,7 +26,7 @@ class NntpImporter(MailImporter):
         This constructs an instance of the NntpImporter to import messages from
         a given group on the NNTP server into the database.
         """
-        super(NntpImporter, self).__init__(mailing_list)
+        super().__init__(mailing_list)
         self._parse_url()
 
         self.nntp = nntplib.NNTP(self.server, self.port,
@@ -42,7 +42,7 @@ class NntpImporter(MailImporter):
         - self.password
         - self.group
         """
-        url = urlparse.urlparse(self.object.archive_url)
+        url = urllib.parse.urlparse(self.object.archive_url)
         assert url.scheme == 'nntp'
 
         self.group = url.path.lstrip('/')
@@ -76,7 +76,7 @@ class NntpImporter(MailImporter):
 
                 _, article_id, _ = self.nntp.next()
 
-        except nntplib.NNTPTemporaryError, e:
+        except nntplib.NNTPTemporaryError as e:
             if e.message != '421 No next article to retrieve':
                 raise
 

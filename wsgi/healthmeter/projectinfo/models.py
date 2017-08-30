@@ -3,7 +3,7 @@
 
 from django.db import models
 from django.utils.text import slugify
-from itertools import chain, izip, repeat
+from itertools import chain, repeat
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 import os
@@ -15,7 +15,7 @@ class BusinessUnit(models.Model):
 
     objects = get_natural_key_manager('name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @property
@@ -30,7 +30,7 @@ class Product(models.Model):
 
     objects = get_natural_key_manager('name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -65,8 +65,8 @@ class Project(MPTTModel):
 
     tree = TreeManager()
 
-    def __unicode__(self):
-        return unicode(self.name)
+    def __str__(self):
+        return str(self.name)
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -79,8 +79,8 @@ class Release(models.Model):
 
     objects = get_natural_key_manager('project', 'version')
 
-    def __unicode__(self):
-        return u"{0} {1}{2}".format(
+    def __str__(self):
+        return "{0} {1}{2}".format(
             self.project.name,
             '' if self.version.startswith('v') else 'v',
             self.version)
@@ -96,5 +96,5 @@ class License(models.Model):
 
     objects = get_natural_key_manager('name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

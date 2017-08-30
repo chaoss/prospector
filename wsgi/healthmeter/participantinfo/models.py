@@ -7,7 +7,7 @@ from healthmeter.projectinfo.decorators import resource
 
 
 class Participant(models.Model):
-    def __unicode__(self):
+    def __str__(self):
         try:
             return self.names.all()[:1][0].name
 
@@ -19,7 +19,7 @@ class ParticipantName(models.Model):
     name = models.CharField(max_length=255)
     participant = models.ForeignKey(Participant, related_name='names')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -34,8 +34,8 @@ class EmailDomain(models.Model):
         verbose_name = "Email Domain"
         ordering = ['domain']
 
-    def __unicode__(self):
-        return unicode(self.domain)
+    def __str__(self):
+        return self.domain
 
 
 class EmailAddressManager(managers.NaturalKeyManagerBase,
@@ -60,7 +60,7 @@ class EmailAddress(models.Model):
     def __init__(self, *args, **kwargs):
         self._filter_kwargs(kwargs, create=True)
 
-        super(EmailAddress, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     @transaction.atomic
     def save(self, *args, **kwargs):
@@ -73,25 +73,25 @@ class EmailAddress(models.Model):
             self.domainpart.save(*args, **kwargs2)
             self.domainpart = EmailDomain.objects.get(id=self.domainpart.id)
 
-        return super(EmailAddress, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     class QuerySet(models.query.QuerySet):
         """Custom queryset that allows for querying by full address"""
         def filter(self, *args, **kwargs):
             self.model._filter_kwargs(kwargs, create=False)
 
-            return super(EmailAddress.QuerySet, self).filter(*args, **kwargs)
+            return super().filter(*args, **kwargs)
 
     @property
     def address(self):
         """Convenience property to get full address"""
         if self.domainpart:
-            return u'%s@%s' % (self.localpart, self.domainpart.domain)
+            return '%s@%s' % (self.localpart, self.domainpart.domain)
 
         else:
-            return unicode(self.localpart)
+            return self.localpart
 
-    def __unicode__(self):
+    def __str__(self):
         return self.address
 
     @staticmethod

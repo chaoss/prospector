@@ -18,7 +18,7 @@ class MetricHistoryView(DetailView):
     model = Project
 
     def get_context_data(self, **kwargs):
-        data = super(MetricHistoryView, self).get_context_data(**kwargs)
+        data = super().get_context_data(**kwargs)
 
         base_qs = MetricCache.objects.filter(project=self.object,
                                              end__isnull=False)

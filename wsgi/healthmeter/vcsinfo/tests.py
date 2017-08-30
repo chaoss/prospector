@@ -19,9 +19,9 @@ class TestType(TestCase):
         with self.assertRaises(IntegrityError):
             Type.objects.create(name='git')
 
-    def test_unicode(self):
+    def test_str(self):
         t = Type.objects.get(name='git')
-        self.assertEqual(unicode(t), 'git')
+        self.assertEqual(t, 'git')
 
 
 class TestRepository(TestCase):
@@ -34,12 +34,12 @@ class TestRepository(TestCase):
         with self.assertRaises(IntegrityError):
             Repository.objects.create(type=t, url=url)
 
-    def test_unicode(self):
+    def test_str(self):
         t = Type.objects.get(name='git')
         url = 'git://foob/bar.git'
         r = Repository.objects.create(type=t, url=url)
 
-        self.assertEqual(unicode(r), url)
+        self.assertEqual(r, url)
 
 
 class TestCommit(TestCase):

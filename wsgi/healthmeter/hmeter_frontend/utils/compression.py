@@ -1,7 +1,7 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-import cStringIO
+import io
 import zlib
 import bz2
 import logging
@@ -19,7 +19,7 @@ class DecompressorFileProxy(object):
     functionality common to the specialized DecompresorFileProxy classes.
     """
 
-    buffer_ = cStringIO.StringIO('')
+    buffer_ = io.StringIO('')
 
     def _read(self):
         """
@@ -38,7 +38,7 @@ class DecompressorFileProxy(object):
         @return data no longer than `size'
         """
 
-        retval = cStringIO.StringIO()
+        retval = io.StringIO()
 
         if size < 0:
             retval.write(self.buffer_.read())
@@ -55,7 +55,7 @@ class DecompressorFileProxy(object):
                 # Overflow, slice it up and store remaining in the buffer
                 remsize = size - retval.tell()
                 retval.write(moredata[:remsize])
-                self.buffer_ = cStringIO.StringIO(moredata[remsize:])
+                self.buffer_ = io.StringIO(moredata[remsize:])
 
             else:
                 retval.write(moredata)
@@ -108,15 +108,14 @@ def get_decompressed_fileobj(fileobj):
 
     m = magic.Magic(mime=True)
     buf = fileobj.read(100)
-    fileobj = ChainFile(cStringIO.StringIO(buf),
-                        fileobj)
+    fileobj = ChainFile(io.StringIO(buf), fileobj)
 
     try:
         return available_decompressors[m.from_buffer(buf)](fileobj)
 
-    except KeyError, e:
-        logger.warn("Could not find compressor for [%s], returning "
-                    "original fileobj", e.args[0])
+    except KeyError as e:
+        logger.warning("Could not find compressor for [%s], returning "
+                       "original fileobj", e.args[0])
         return fileobj
 
 

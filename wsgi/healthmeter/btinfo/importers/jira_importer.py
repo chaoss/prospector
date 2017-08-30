@@ -26,7 +26,7 @@ class JIRAImporter(BugTrackerImporter):
     }
 
     def __init__(self, bt_info):
-        super(JIRAImporter, self).__init__(bt_info)
+        super().__init__(bt_info)
 
         options = {'server': bt_info.bug_tracker.baseurl,
                    'verify': False}
@@ -94,10 +94,10 @@ class JIRAImporter(BugTrackerImporter):
                 except JIRAError as e:
                     tries -= 1
 
-                    logger.warn("Caught JIRAError while querying at offset "
-                                "[%s]. Tries remaining=%s",
-                                offset, tries,
-                                exc_info=True)
+                    logger.warning("Caught JIRAError while querying at offset "
+                                   "[%s]. Tries remaining=%s",
+                                   offset, tries,
+                                   exc_info=True)
 
                     if not tries:
                         raise

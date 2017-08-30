@@ -2,7 +2,7 @@
 # License: GPLv3 or any later version
 
 from django.core.exceptions import ImproperlyConfigured
-from itertools import chain, izip, repeat
+from itertools import chain, repeat
 from .models import Project
 from .resources import register_resource
 
@@ -17,8 +17,8 @@ def _get_project_field(cls):
 
     except AttributeError:
         fields_iter = chain(
-            izip(repeat(False), cls._meta.get_fields_with_model()),
-            izip(repeat(True), cls._meta.get_m2m_with_model())
+            zip(repeat(False), cls._meta.get_fields_with_model()),
+            zip(repeat(True), cls._meta.get_m2m_with_model())
         )
 
         # Look for fk/1to1 field

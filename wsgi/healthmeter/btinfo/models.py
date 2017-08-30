@@ -15,8 +15,8 @@ class Type(models.Model):
     name = models.CharField(max_length=10, unique=True)
     objects = get_natural_key_manager('name')
 
-    def __unicode__(self):
-        return unicode(self.name)
+    def __str__(self):
+        return self.name
 
 
 class BugTracker(models.Model):
@@ -31,8 +31,8 @@ class BugTracker(models.Model):
     class Meta:
         verbose_name = "Bug Tracker"
 
-    def __unicode__(self):
-        return unicode(self.baseurl)
+    def __str__(self):
+        return self.baseurl
 
 
 @resource
@@ -49,7 +49,7 @@ class BugNamespace(models.Model):
 
     objects = get_natural_key_manager('product', 'component', 'bug_tracker')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'(%s, %s) on %s' % (self.product, self.component,
                                     self.bug_tracker)
 
@@ -88,7 +88,7 @@ class Severity(models.Model):
 
     objects = get_natural_key_manager('level')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -103,9 +103,9 @@ class Bug(models.Model):
     class Meta:
         unique_together = ('tracker_info', 'bug_id')
 
-    def __unicode__(self):
-        return u'Bug #%s on %s' % (self.bug_id,
-                                   self.tracker_info)
+    def __str__(self):
+        return 'Bug #%s on %s' % (self.bug_id,
+                                  self.tracker_info)
 
 
 class Comment(models.Model):
@@ -117,8 +117,8 @@ class Comment(models.Model):
 
     objects = get_natural_key_manager('bug', 'comment_id')
 
-    def __unicode__(self):
-        return u'Comment #%s on  %s' % (self.comment_id, self.bug)
+    def __str__(self):
+        return 'Comment #%s on  %s' % (self.comment_id, self.bug)
 
     class Meta:
         unique_together = ('bug', 'comment_id')

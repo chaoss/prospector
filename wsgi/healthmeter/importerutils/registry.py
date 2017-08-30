@@ -26,13 +26,13 @@ def register_importer(importercls, model, key=None):
 def lookup_importer(model):
     load_importer_modules()
 
-    if isinstance(model, (str, unicode)):
+    if isinstance(model, str):
         model = get_model(*model.split('.', 2))
 
     try:
         return importers_by_model[model]
-    except KeyError, e:
-        for key, value in importers_by_model.iteritems():
+    except KeyError as e:
+        for key, value in importers_by_model.items():
             if key in model.__mro__:
                 return value
 

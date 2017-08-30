@@ -261,8 +261,8 @@ class MetricScoreConstants(models.Model):
 
         return super(MetricScoreConstants, self).save(*args, **kwargs)
 
-    def __unicode__(self):
-        return u'(red=%.2f, ry=%.2f, yellow=%.2f, yg=%.2f, green=%.2f)' % (
+    def __str__(self):
+        return '(red=%.2f, ry=%.2f, yellow=%.2f, yg=%.2f, green=%.2f)' % (
             self.red_score,
             self.ry_boundary,
             self.yellow_score,
@@ -276,7 +276,7 @@ class MetricAlgorithm(models.Model):
 
     objects = get_natural_key_manager('name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -299,7 +299,7 @@ class Metric(MPTTModel):
         ordering = ('tree_id', 'level', 'sibling_order')
         order_insertion_by = ('sibling_order')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def clean(self):
@@ -470,8 +470,8 @@ class MetricCache(models.Model):
             current_datalist = {}
 
             if datalist_order is not None:
-                datalist_order_lookup = dict(itertools.izip(datalist_order[1],
-                                                            itertools.count()))
+                datalist_order_lookup = dict(zip(datalist_order[1],
+                                                 itertools.count()))
 
                 def sort_keyfn(data):
                     return datalist_order_lookup[data[datalist_order[0]]]

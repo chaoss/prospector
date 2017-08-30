@@ -3,12 +3,10 @@
 
 from dateutil import parser as dateparser, tz
 from email.utils import parseaddr
-from calendar import timegm
 from collections import defaultdict
-import datetime
 import logging
 import re
-import urlparse
+import urllib.parse
 
 from django.db import IntegrityError, transaction
 
@@ -37,7 +35,7 @@ class MailImporter(ImporterBase):
 
     @classmethod
     def resolve_importer_type(cls, mailing_list):
-        return urlparse.urlparse(mailing_list.archive_url).scheme
+        return urllib.parse.urlparse(mailing_list.archive_url).scheme
 
     def get_messages(self):
         """
@@ -69,7 +67,7 @@ class MailImporter(ImporterBase):
 
                 del waiting_refs[msg.msgid]
 
-            except MissingRef, e:
+            except MissingRef as e:
                 for ref in e.missing_refs:
                     waiting_refs[ref].add(msg)
 
@@ -99,8 +97,8 @@ class MailImporter(ImporterBase):
             root_messages = []
 
             for ref in missing_refs:
-                logger.warn("Referenced message [%s] not found in database or "
-                            "imported archive, ignoring", ref)
+                logger.warning("Referenced message [%s] not found in database or "
+                               "imported archive, ignoring", ref)
 
                 for msg in waiting_refs[ref]:
                     if not msg.ignore_ref(ref):

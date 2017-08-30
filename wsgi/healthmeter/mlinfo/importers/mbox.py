@@ -17,7 +17,7 @@ class MBoxImporter(MailImporter):
         mailing_list: Mailing list object; See Importer.__init__
         mbox_files: List of paths mbox file paths
         """
-        super(MBoxImporter, self).__init__(mailing_list)
+        super().__init__(mailing_list)
         self.mboxes = [mailbox.mbox(path) for path in mbox_files]
 
     def close(self):
@@ -36,8 +36,8 @@ class MBoxImporter(MailImporter):
                                   msg['Message-Id'], msg['References'])
 
                 except:
-                    logger.warn('Malformed message found, skipping:\n%s', msg,
-                                exc_info=True)
+                    logger.warning('Malformed message found, skipping:\n%s', msg,
+                                   exc_info=True)
                     msg = None
 
                 # yield outside the try block to avoid capturing exceptions

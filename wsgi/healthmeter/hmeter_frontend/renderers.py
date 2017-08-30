@@ -70,15 +70,13 @@ class ProjectRenderer(StaticSiteRenderer):
     def render_path(self, *args, **kwargs):
         # Retry after an InterfaceError
         max_attempts = 5
-        for i in xrange(max_attempts):
+        for i in range(max_attempts):
             try:
-                return super(ProjectRenderer, self).render_path(*args,
-                                                                **kwargs)
-
-            except InterfaceError, e:
-                self.logger.warn("Caught InterfaceError, closing connection "
-                                 "and trying again (attempt #%s)",
-                                 i, exc_info=True)
+                return super().render_path(*args, **kwargs)
+            except InterfaceError as e:
+                self.logger.warning("Caught InterfaceError, closing connection "
+                                    "and trying again (attempt #%s)",
+                                    i, exc_info=True)
                 try:
                     connection.close()
                 except:
@@ -102,7 +100,7 @@ class ManualRenderer(ProjectRenderer):
     """
     def __init__(self, paths):
         self.__paths = paths
-        super(ManualRenderer, self).__init__()
+        super().__init__()
 
     def get_paths(self):
         return self.__paths

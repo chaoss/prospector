@@ -10,7 +10,7 @@ from .shortcuts import run_importer
 logger = logging.getLogger(__name__)
 
 
-class ImporterTask(object):
+class ImporterTask:
     def __init__(self, obj):
         self.obj = obj
 

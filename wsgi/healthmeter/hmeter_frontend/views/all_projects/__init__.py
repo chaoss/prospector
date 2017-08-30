@@ -6,7 +6,7 @@ from collections import namedtuple
 import os
 import glob
 import json
-from itertools import chain, imap
+from itertools import chain
 from healthmeter.hmeter_frontend.models import Project
 from healthmeter.hmeter_frontend.utils.iterators import uniq
 
@@ -24,7 +24,7 @@ class AllProjectsView(TemplateView):
             os.path.join(os.path.dirname(__file__), '*.json'))
 
         def gen_project_lists():
-            for f in imap(open, json_files):
+            for f in map(open, json_files):
                 with f:
                     yield json.load(f)
 

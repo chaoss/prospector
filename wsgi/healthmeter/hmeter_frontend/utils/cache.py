@@ -20,7 +20,7 @@ class cached_property(property):
     def __init__(self, fget, *args, **kwargs):
         assert fget is not None  # No point using cache if no getter function
         self.cache_key = fget.__name__
-        super(cached_property, self).__init__(fget=fget, *args, **kwargs)
+        super().__init__(fget=fget, *args, **kwargs)
 
     def __get_cacheobj(self, obj):
         """Get the cached_properties dict for obj. Create if not present."""

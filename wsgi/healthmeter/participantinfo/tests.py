@@ -23,10 +23,10 @@ class TestParticipant(TestCase):
 
         self.assertNotEqual(participant.id, participant2.id)
 
-    def test_unicode(self):
+    def test_str(self):
         participant = Participant.objects.create(name=self.name)
 
-        self.assertEqual(unicode(participant), self.name)
+        self.assertEqual(participant, self.name)
 
 
 class TestEmailDomain(TestCase):
@@ -45,10 +45,10 @@ class TestEmailDomain(TestCase):
         with self.assertRaises(IntegrityError):
             EmailDomain.objects.create(domain=None)
 
-    def test_unicode(self):
+    def test_str(self):
         e = EmailDomain.objects.create(domain=self.domain)
 
-        self.assertEqual(unicode(e), self.domain)
+        self.assertEqual(e, self.domain)
         self.assertEqual(e.domain, self.domain)
 
 
@@ -71,7 +71,7 @@ class TestEmailAddress(TransactionTestCase):
             localpart=self.localpart,
             domainpart=EmailDomain.objects.create(domain=self.domainpart))
 
-        self.assertEqual(unicode(emailobj), self.email)
+        self.assertEqual(emailobj, self.email)
         self.assertEqual(emailobj.address, self.email)
 
     def test_address_attribute(self):

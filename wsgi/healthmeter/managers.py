@@ -3,10 +3,7 @@
 
 import collections
 from django.db import models
-from itertools import izip
 import mptt.managers
-
-import types
 
 
 class QuerySetManager(models.Manager):
@@ -93,7 +90,7 @@ class NaturalKeyManagerBase(models.Manager):
     def get_by_natural_key(self, *args):
         query = models.Q()
 
-        for col, value in izip(self.natural_key_columns, args):
+        for col, value in zip(self.natural_key_columns, args):
             fieldinfo = self._get_field_info(col)
             if not fieldinfo.direct:
                 raise ConfigurationError("Cannot use NaturalKeyManager "

@@ -25,10 +25,10 @@ class TestProject(TestCase):
         self.assertEqual(p2.parent, p1)
         self.assertIn(p2, p1.children.all())
 
-    def test_unicode(self):
+    def test_str(self):
         """Tests the __unicode__ function"""
         p1 = Project(name='test')
-        self.assertEqual(unicode(p1), 'test')
+        self.assertEqual(p1, 'test')
 
 
 class TestRelease(TestCase):

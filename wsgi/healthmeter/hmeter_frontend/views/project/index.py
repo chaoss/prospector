@@ -5,7 +5,7 @@ import collections
 from django.db.models import Max, Min
 from django.views.generic import ListView
 from django.utils.safestring import mark_safe
-import simplejson
+import json
 
 from healthmeter.utils import djcached, ProxyObject
 from healthmeter.hmeter_frontend.utils.stats import max_or_none, min_or_none
@@ -19,7 +19,7 @@ class ProjectIndex(ListView):
     context_object_name = 'projects'
 
     def get_context_data(self, *args, **kwargs):
-        data = super(ProjectIndex, self).get_context_data(*args, **kwargs)
+        data = super().get_context_data(*args, **kwargs)
 
         data['l1_metrics'] = Metric.objects.filter(level=1).order_by('lft')
         data['descriptions'] = dict((project.id, project.description)

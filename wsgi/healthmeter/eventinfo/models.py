@@ -15,5 +15,5 @@ class Event(models.Model):
             raise ValidationError("Ending date must come after starting date "
                                   "of event")
 
-    def __unicode__(self):
-        return u'%s (%s-%s)' % (self.desc, self.date_start, self.date_end)
+    def __str__(self):
+        return '%s (%s-%s)' % (self.desc, self.date_start, self.date_end)

@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class ImporterBaseMeta(abc.ABCMeta):
     def __new__(cls, name, bases, attrs):
-        instance = super(abc.ABCMeta, cls).__new__(cls, name, bases, attrs)
+        instance = super().__new__(cls, name, bases, attrs)
         try:
             model = attrs['model']
             logger.debug("Registering importer %s for model %s", instance,

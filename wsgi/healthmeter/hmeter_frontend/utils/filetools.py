@@ -1,7 +1,7 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-import cStringIO
+import io
 
 
 class ChainFile(object):
@@ -15,7 +15,7 @@ class ChainFile(object):
         if size < 0:
             return ''.join(f.read() for f in self.files)
 
-        buf = cStringIO.StringIO()
+        buf = io.StringIO()
         while self.files and size > 0:
             s = self.files[0].read(size)
 

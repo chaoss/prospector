@@ -73,7 +73,7 @@ class BugzillaImporter(BugTrackerImporter):
     }
 
     def __init__(self, bt_info):
-        super(BugzillaImporter, self).__init__(bt_info)
+        super().__init__(bt_info)
 
         xmlrpc_url = bt_info.bug_tracker.baseurl
         if 'xmlrpc.cgi' not in xmlrpc_url:
@@ -170,8 +170,8 @@ class BugzillaImporter(BugTrackerImporter):
             # Actual generator code
             for bug in current_bugs:
                 if not bug.comments:
-                    logger.warn("No comments for bug [%s], skipping.",
-                                bug.id)
+                    logger.warning("No comments for bug [%s], skipping.",
+                                    bug.id)
                 yield bug
 
     def _run(self):
@@ -242,12 +242,12 @@ class BugzillaImporter(BugTrackerImporter):
                 if dj_comment.timestamp != posting_date:
                     dirty = True
                     dj_comment.timestamp = posting_date
-                    logger.warn("Fixing timestamp of [%s]",
-                                dj_comment)
+                    logger.warning("Fixing timestamp of [%s]",
+                                    dj_comment)
                 if dj_comment.author != author:
                     dirty = True
-                    logger.warn("Fixing author of [%s], from [%s] to [%s]",
-                                dj_comment, dj_comment.author, author)
+                    logger.warning("Fixing author of [%s], from [%s] to [%s]",
+                                   dj_comment, dj_comment.author, author)
                     dj_comment.author = author
 
                 if dirty:

@@ -3,8 +3,9 @@
 
 import bs4
 import logging
-import urllib2
-import urlparse
+import urllib.request
+import urllib.parse
+
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 class LinkScraper(object):
     def __init__(self, url, patterns, max_depth=-1):
         self.url = url
-        self.parsed_url = urlparse.urlparse(url)
+        self.parsed_url = urllib.parse.urlparse(url)
         self.patterns = patterns
         self.max_depth = max_depth
 
@@ -22,7 +23,7 @@ class LinkScraper(object):
         return self.get_links()
 
     def get_links(self):
-        response = urllib2.urlopen(self.url)
+        response = urllib.request.urlopen(self.url)
         bs = bs4.BeautifulSoup(response)
 
         for link in bs.find_all('a'):
@@ -33,8 +34,8 @@ class LinkScraper(object):
                 # this happens for <a> tags without a href attribute
                 continue
 
-            url = urlparse.urljoin(self.url, href)
-            purl = urlparse.urlparse(url)
+            url = urllib.parse.urljoin(self.url, href)
+            purl = urllib.parse.urlparse(url)
 
             # yield matching patterns immediately
             for i in self.patterns:

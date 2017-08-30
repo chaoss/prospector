@@ -14,8 +14,8 @@ class Purpose(models.Model):
     name = models.CharField(max_length=50, unique=True)
     objects = get_natural_key_manager('name')
 
-    def __unicode__(self):
-        return unicode(self.name)
+    def __str__(self):
+        return self.name
 
 
 @resource
@@ -29,8 +29,8 @@ class MailingList(models.Model):
 
     objects = get_natural_key_manager('posting_address')
 
-    def __unicode__(self):
-        return unicode(self.posting_address)
+    def __str__(self):
+        return self.posting_address
 
 
 class MailingListProject(models.Model):
@@ -41,9 +41,9 @@ class MailingListProject(models.Model):
 
     objects = get_natural_key_manager('project', 'mailing_list')
 
-    def __unicode__(self):
-        return u"%s (%s): %s" % (self.project.name, self.purpose.name,
-                                 self.mailing_list.posting_address)
+    def __str__(self):
+        return "%s (%s): %s" % (self.project.name, self.purpose.name,
+                                self.mailing_list.posting_address)
 
     class Meta:
         verbose_name = "Mailing List-Project relationship"
@@ -62,5 +62,5 @@ class Post(models.Model):
 
     objects = get_natural_key_manager('message_id')
 
-    def __unicode__(self):
-        return unicode(self.message_id)
+    def __str__(self):
+        return self.message_id

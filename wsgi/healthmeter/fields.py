@@ -11,7 +11,7 @@ class PlaintextPasswordField(models.CharField):
     def formfield(self, form_class=forms.CharField, **kwargs):
         kwargs['widget'] = forms.PasswordInput
 
-        return super(PlaintextPasswordField,
-                     self).formfield(form_class=form_class, **kwargs)
+        return super().formfield(form_class=form_class, **kwargs)
+
 
 add_introspection_rules([], ["^healthmeter\.fields\.PlaintextPasswordField"])

@@ -29,20 +29,20 @@ from healthmeter.hmeter_frontend.utils.cache import cached_property
 class GraphDataView(JsonView):
     @classmethod
     def as_view(cls, *args, **kwargs):
-        view = super(GraphDataView, cls).as_view(*args, **kwargs)
+        view = super().as_view(*args, **kwargs)
         return cache_page(6 * 60 * 60)(view)
 
     def get(self, request, id, *args, **kwargs):
         self.project = models.Project.objects.get(id=id)
         self.projects = self.project.all_projects
 
-        return super(GraphDataView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_data(self):
         return {}
 
     def get_context_data(self, **kwargs):
-        context = super(GraphDataView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['data'] = self.get_data()
         return context
 
@@ -98,7 +98,7 @@ class FrequencyDataView(GraphDataView):
                 current_date = i['datestamp']
 
                 if prev_date is not None:
-                    for j in xrange(1, (current_date - prev_date).days):
+                    for j in range(1, (current_date - prev_date).days):
                         yield [cls.get_datestamp(prev_date + timedelta(j)), 0]
 
                 prev_date = current_date
@@ -115,7 +115,7 @@ class FrequencyDataView(GraphDataView):
             data[series_name] = self.gen_freq_series(qs, timestamp_column)
 
         if len(data) == 1:
-            return data.values()[0]
+            return [d for d in data.values()][0]
 
         return data
 
@@ -127,7 +127,7 @@ class ContributorDataView(FrequencyDataView):
     count_column = 'author'
 
 
-class DomainFilterMixin(object):
+class DomainFilterMixin:
     def filter_by_domain(self, qs):
         domain = self.kwargs.get('domain')
 

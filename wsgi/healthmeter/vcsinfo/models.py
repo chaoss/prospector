@@ -17,8 +17,8 @@ class Type(models.Model):
         verbose_name_plural = "VCS types"
         verbose_name = "VCS type"
 
-    def __unicode__(self):
-        return unicode(self.name)
+    def __str__(self):
+        return self.name
 
 
 @resource
@@ -32,8 +32,8 @@ class Repository(models.Model):
         verbose_name_plural = "VCS repositories"
         verbose_name = "VCS repository"
 
-    def __unicode__(self):
-        return unicode(self.url)
+    def __stre__(self):
+        return self.url
 
 
 class Committer(models.Model):
@@ -44,7 +44,7 @@ class Committer(models.Model):
     class Meta:
         unique_together = ('userid', 'repository')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.userid
 
 
@@ -62,8 +62,8 @@ class Commit(dagmodels.node_factory('CommitEdge')):
 
         unique_together = ('repository', 'commit_id')
 
-    def __unicode__(self):
-        return u'{0} on {1}'.format(self.commit_id, self.repository)
+    def __str__(self):
+        return '{0} on {1}'.format(self.commit_id, self.repository)
 
 
 class CommitEdge(dagmodels.edge_factory('Commit', concrete=False)):
@@ -81,7 +81,7 @@ class Branch(models.Model):
 
     @transaction.atomic
     def save(self, *args, **kwargs):
-        super(Branch, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         if Branch.objects \
                 .filter(name=self.name,
                         latest_commit__repository=self.repository) \
@@ -89,5 +89,5 @@ class Branch(models.Model):
                 .exists():
             raise IntegrityError("Branch called {0} already exists for {1}")
 
-    def __unicode__(self):
-        return u'{0} on {1}'.format(self.name, self.repository)
+    def __str__(self):
+        return '{0} on {1}'.format(self.name, self.repository)

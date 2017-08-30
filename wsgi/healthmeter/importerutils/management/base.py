@@ -85,9 +85,9 @@ provided, it is run on all entries in the database.
                 # timeout to be more or less equivalent to promise.get()
                 # See: https://stackoverflow.com/questions/1408356/
                 promise.get(365*24*3600)
-            except BaseException, e:
+            except BaseException as e:
                 if isinstance(e, KeyboardInterrupt):
-                    logger.warn("Importer terminated by keyboard interrupt")
+                    logger.warning("Importer terminated by keyboard interrupt")
                     pool.terminate()
                     pool.join()
                     raise

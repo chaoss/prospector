@@ -77,7 +77,7 @@ class PageNotFoundView(TemplateView):
     ]
 
     def get_context_data(self, **kwargs):
-        data = super(PageNotFoundView, self).get_context_data(**kwargs)
+        data = super().get_context_data(**kwargs)
         data['quote'] = self.quotes[random.randrange(0, len(self.quotes))]
 
         return data
@@ -85,7 +85,6 @@ class PageNotFoundView(TemplateView):
     def render_to_response(self, *args, **kwargs):
         """Hack to pre-render the response before passing it back"""
         kwargs['status'] = 404
-        response = super(PageNotFoundView, self).render_to_response(*args,
-                                                                    **kwargs)
+        response = super().render_to_response(*args, **kwargs)
         response.render()
         return response

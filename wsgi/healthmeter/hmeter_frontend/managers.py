@@ -5,6 +5,7 @@ import collections
 import datetime
 from django.db.models.query import QuerySet
 from django.db.models import Max, Min, Q
+import functools
 import itertools
 import operator
 
@@ -30,7 +31,7 @@ class ProjectQuerySet(QuerySet):
         # Handling non-root projects would increase the complexity
         # significantly, so don't bother for the time being.
         if any(proj.parent_id for proj in self):
-            raise NotImplemented("Cannot prefetch dates for non-root projects")
+            raise NotImplementedError("Cannot prefetch dates for non-root projects")
 
         # First bulk fetch dates
         models = (
@@ -71,7 +72,7 @@ class ProjectQuerySet(QuerySet):
             startact = project.start_date or startact
 
             # smart_start_date should be a date, so coax to that type
-            if type(startact) is datetime.datetime:
+            if isinstance(startact, datetime.datetime):
                 startact = startact.date()
 
             self.model.smart_start_date.preseed_cache(project, startact)
@@ -114,7 +115,7 @@ class ProjectQuerySet(QuerySet):
 
             filters.append(Q(tree_id=node.tree_id, lft__gt=lft, rght__lt=rght))
 
-        q = reduce(operator.or_, filters)
+        q = functools.reduce(operator.or_, filters)
 
         return self.model.objects.filter(q)
 
@@ -133,7 +134,7 @@ class ProjectQuerySet(QuerySet):
 
             filters.append(Q(tree_id=node.tree_id, lft__lt=lft, rght__gt=rght))
 
-        q = reduce(operator.or_, filters)
+        q = functools.reduce(operator.or_, filters)
 
         return self.model.objects.filter(q)
 

@@ -50,9 +50,9 @@ class TestType(TestCaseBase, TestCase):
         with self.assertRaises(IntegrityError):
             Type.objects.create(name='foo')
 
-    def test_unicode(self):
+    def test_str(self):
         t = Type.objects.create(name='foo')
-        self.assertEqual(unicode(t), 'foo')
+        self.assertEqual(t, 'foo')
 
 
 class TestBugTracker(TestCaseBase, TransactionTestCase):
@@ -63,9 +63,9 @@ class TestBugTracker(TestCaseBase, TransactionTestCase):
             BugTracker.objects.create(baseurl=b.baseurl,
                                       bt_type=b.bt_type)
 
-    def test_unicode(self):
+    def test_str(self):
         b = self._get_bug_tracker()
-        self.assertEqual(unicode(b), self.baseurl)
+        self.assertEqual(b, self.baseurl)
 
     def test_missingfields(self):
         b = BugTracker.objects.create(baseurl=self.baseurl,
@@ -84,13 +84,13 @@ class TestBugTracker(TestCaseBase, TransactionTestCase):
 
 
 class TestNamespace(TestCaseBase, TestCase):
-    def test_unicode(self):
+    def test_str(self):
         bt = self._get_bug_tracker()
         ns = BugNamespace.objects.create(bug_tracker=bt,
                                          product='foo',
                                          component='bar')
 
-        self.assertEqual(unicode(ns), '(foo, bar) on %s' % (bt,))
+        self.assertEqual(ns, '(foo, bar) on %s' % (bt,))
 
     def test_unique(self):
         bt = self._get_bug_tracker()
@@ -113,9 +113,9 @@ class TestSeverity(TestCase):
         with self.assertRaises(IntegrityError):
             Severity.objects.create(name="wishlist")
 
-    def test_unicode(self):
+    def test_str(self):
         s = Severity(name="wishlist")
-        self.assertEqual(unicode(s), "wishlist")
+        self.assertEqual(s, "wishlist")
 
 
 class TestBug(TestCaseBase, TestCase):

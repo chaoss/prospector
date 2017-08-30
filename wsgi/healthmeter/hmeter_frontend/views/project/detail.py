@@ -4,7 +4,7 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from itertools import groupby
-import simplejson
+import json
 
 from django.conf import settings
 from django.db.models import Count, Sum
@@ -217,7 +217,7 @@ class ProjectDetail(DetailView):
     def populate_metricinfo(self):
         score_constants = get_score_constants()
 
-        self.data['metric_score_constants'] = simplejson.dumps({
+        self.data['metric_score_constants'] = json.dumps({
             'yg_boundary': score_constants.yg_boundary,
             'ry_boundary': score_constants.ry_boundary
         })

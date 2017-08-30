@@ -3,7 +3,7 @@
 
 from django.http import HttpResponse
 from django.views.generic import View
-import simplejson
+import json
 
 
 class RawDataView(View):
@@ -31,4 +31,4 @@ class JsonView(RawDataView):
         return self.data
 
     def get_output(self):
-        return simplejson.dumps(self.get_data())
+        return json.dumps(self.get_data())

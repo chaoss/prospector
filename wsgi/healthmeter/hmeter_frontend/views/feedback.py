@@ -15,7 +15,7 @@ import json
 class FeedbackView(View):
     @classmethod
     def as_view(cls, *args, **kwargs):
-        return csrf_exempt(super(FeedbackView, cls).as_view(*args, **kwargs))
+        return csrf_exempt(super().as_view(*args, **kwargs))
 
     @staticmethod
     def format_email(name, email):
