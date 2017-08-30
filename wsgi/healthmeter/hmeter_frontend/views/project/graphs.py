@@ -5,7 +5,7 @@ from calendar import timegm
 import collections
 import contextlib
 from datetime import datetime, time, timedelta
-import simplejson
+import json
 
 from django.db.models import Count
 from django.views.generic import TemplateView

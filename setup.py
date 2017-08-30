@@ -25,7 +25,6 @@ install_requires = [
     'jira>=0.13',
     'requests>=1.0',
     'bzr',
-    'django-cachebuster',
     'jsonfield',
     # 'django-preferences>=0.0.6.1',
     'logutils',           # required for django-medusa
