@@ -20,7 +20,7 @@ class IncludeOrNode(template.Node):
                 raise
             return self.nodelist.render(context)
         else:
-            return tmp.render(context)
+            return tmp.render(context.flatten())
 
 
 @register.tag
