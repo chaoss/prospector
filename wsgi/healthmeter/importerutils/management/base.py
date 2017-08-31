@@ -59,7 +59,7 @@ provided, it is run on all entries in the database.
               else self.model.objects.all())
 
         try:
-            self.model._meta.get_field_by_name('last_updated')
+            self.model._meta.get_field('last_updated')
             qs = itertools.chain(qs.filter(last_updated=None),
                                  qs.order_by('last_updated'))
 

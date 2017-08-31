@@ -6,6 +6,26 @@ from itertools import chain, repeat
 from .models import Project
 from .resources import register_resource
 
+# See deprecation
+# https://docs.djangoproject.com/en/1.11/ref/models/meta/#migrating-from-the-old-api
+
+def get_fields_with_model(cls):
+    return [
+        (f, f.model if f.model != cls else None)
+        for f in cls._meta.get_fields()
+        if not f.is_relation
+        or f.one_to_one
+        or (f.many_to_one and f.related_model)
+    ]
+
+
+def get_m2m_with_model(cls):
+    return [
+        (f, f.model if f.model != cls else None)
+        for f in cls._meta.get_fields()
+        if f.many_to_many and not f.auto_created
+    ]
+
 
 @classmethod
 def _get_project_field(cls):
@@ -17,8 +37,8 @@ def _get_project_field(cls):
 
     except AttributeError:
         fields_iter = chain(
-            zip(repeat(False), cls._meta.get_fields_with_model()),
-            zip(repeat(True), cls._meta.get_m2m_with_model())
+            zip(repeat(False), get_fields_with_model(cls)),
+            zip(repeat(True), get_m2m_with_model(cls))
         )
 
         # Look for fk/1to1 field
