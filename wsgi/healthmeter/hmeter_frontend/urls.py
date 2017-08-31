@@ -1,14 +1,13 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView, TemplateView
 
 from . import views
 
-project_urlpatterns = patterns(
-    '',
+project_urlpatterns = [
     url(r'^$', views.project.ProjectIndex.as_view(), name="index"),
 
     url(r'^\+problems$', views.project.ProblematicProjects.as_view(),
@@ -57,10 +56,9 @@ project_urlpatterns = patterns(
     url(r'(?P<pk>\d+)/metrichistory/$',
         views.project.MetricHistoryView.as_view(),
         name="metrichistory"),
-)
+]
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         RedirectView.as_view(
             url=reverse_lazy('hmeter_frontend:project:index'),
@@ -84,4 +82,4 @@ urlpatterns = patterns(
 
     url(r'^all-projects/', views.all_projects.AllProjectsView.as_view(),
         name='all_projects'),
-)
+]
