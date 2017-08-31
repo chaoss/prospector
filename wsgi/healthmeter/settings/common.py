@@ -6,7 +6,6 @@
 import os
 import sys
 
-from django.conf import global_settings
 
 PROJECT_DIR = os.path.realpath(
     os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
@@ -19,7 +18,6 @@ for _i in ('', 'django-dag-cte', 'google-trends-csv-downloader',
     sys.path.insert(0, os.path.join(_libdir, _i))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('admin', 'admin@example.com'),
@@ -91,20 +89,29 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'your secret key goes here'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-        'django.template.loaders.eggs.Loader',
-    )),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'healthmeter.hmeter_frontend.context_processors.feedback_form',
-    'sekizai.context_processors.sekizai',
-    'django.core.context_processors.request',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(PROJECT_DIR, 'templates')],
+        'OPTIONS': {
+            'debug': DEBUG,
+            'loaders': [
+                #'django.template.loaders.cached.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.eggs.Loader',
+            ],
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'healthmeter.hmeter_frontend.context_processors.feedback_form',
+                'sekizai.context_processors.sekizai'
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
@@ -116,14 +123,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'healthmeter.urls'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or
-    # "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_DIR, 'templates'),
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
