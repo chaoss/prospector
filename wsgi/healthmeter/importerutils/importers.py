@@ -5,7 +5,6 @@ import abc
 import datetime
 import logging
 from healthmeter.utils import abstractclassmethod
-import six
 
 from .exceptions import UnknownImporter, DuplicateImporter
 from .registry import register_importer
@@ -28,8 +27,7 @@ class ImporterBaseMeta(abc.ABCMeta):
         return instance
 
 
-@six.add_metaclass(ImporterBaseMeta)
-class ImporterBase(object):
+class ImporterBase(metaclass=ImporterBaseMeta):
     """
     Abstract importer class to define a common interface for importing
     things

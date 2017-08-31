@@ -10,7 +10,6 @@ from healthmeter.importerutils.importers import ImporterBase
 from healthmeter.hmeter_frontend.utils import get_participant, coerce_unicode
 from healthmeter.vcsinfo.models import Repository
 import magic
-import six
 import sys
 
 _magic = magic.Magic(mime_encoding=True)
@@ -104,10 +103,9 @@ class VcsImporter(ImporterBase):
                                        userid=userid)
 
             except DatabaseError:
-                exc_info = sys.exc_info()
+                _, ei, tb = sys.exc_info()
 
                 try:
                     return self.object.committers.get(userid=userid)
-
                 except self.object.committers.model.DoesNotExist:
-                    six.reraise(exc_info)
+                    raise ei.with_traceback(tb)
