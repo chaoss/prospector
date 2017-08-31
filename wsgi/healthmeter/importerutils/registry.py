@@ -2,7 +2,8 @@
 # License: GPLv3 or any later version
 
 import collections
-from django.db.models.loading import get_model
+
+from django.apps import apps
 from django_load.core import load
 
 
@@ -27,7 +28,7 @@ def lookup_importer(model):
     load_importer_modules()
 
     if isinstance(model, str):
-        model = get_model(*model.split('.', 2))
+        model = apps.get_model(*model.split('.', 2))
 
     try:
         return importers_by_model[model]
