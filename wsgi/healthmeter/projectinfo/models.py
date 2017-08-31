@@ -34,6 +34,13 @@ class Product(models.Model):
         return self.name
 
 
+def logo_path(instance, filename):
+    return os.path.join(
+        'projectinfo/logos',
+        str(instance.id) if instance.id else slugify(instance.name)
+    )
+
+
 class Project(MPTTModel):
     name = models.CharField(max_length=255)
     website_url = models.URLField(blank=True, null=True)
@@ -55,13 +62,8 @@ class Project(MPTTModel):
     is_wip = models.BooleanField(null=False, default=True,
                                  verbose_name="Configuration in progress")
 
-    def __logo_path(self, filename):
-        return os.path.join(
-            'projectinfo/logos',
-            str(self.id) if self.id else slugify(self.name))
-
     logo = models.ImageField(null=True, blank=True,
-                             upload_to=__logo_path)
+                             upload_to=logo_path)
 
     tree = TreeManager()
 
