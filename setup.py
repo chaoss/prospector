@@ -6,13 +6,12 @@ import os
 from setuptools import setup
 
 install_requires = [
-    'Django==1.6',
+    'Django>=1.11',
     'psycopg2',
     'pillow',
     'django-mptt',
     'dulwich',
     'python-hglib',
-    'South',
     'python-bugzilla',
     'iso8601',
     'beautifulsoup4',

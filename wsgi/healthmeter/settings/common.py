@@ -147,7 +147,6 @@ INSTALLED_APPS = (
     'healthmeter.eventinfo',
     'healthmeter.bloginfo',
     'healthmeter.hmeter_frontend',
-    'south',
     'mptt',
     'colorful',
     'django_medusa',
