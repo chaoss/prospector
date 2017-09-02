@@ -3,11 +3,12 @@
 
 import datetime
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 from django.db import transaction
 from healthmeter.hmeter_frontend.models import Project, MetricCache, Metric
 from healthmeter.hmeter_frontend.metrics.calc import calc_score
 import logging
-from optparse import make_option
+
 
 logger = logging.getLogger(__name__)
 
@@ -16,11 +17,18 @@ class Command(BaseCommand):
     args = '<project id> [<max days>]'
     help = 'Populates the MetricCache model with historical metric information'
 
-    option_list = BaseCommand.option_list + (
-        make_option('-f', '--flush', action="store_true",
-                    dest="flush", default=False,
-                    help="Flush cache"),
-    )
+    def add_arguments(self, parser):
+        parser.add_argument('projectid', type=int)
+
+        parser.add_argument('maxdays',
+                            action="store", type=int, nargs='?',
+                            default=settings.METRIC_CACHE_LIMIT,
+                            help="Max days")
+
+        parser.add_argument('-f', '--flush',
+                            action="store_true",
+                            dest="flush", default=False,
+                            help="Flush cache")
 
     def iterdays(self, maxdays, project_start):
         """

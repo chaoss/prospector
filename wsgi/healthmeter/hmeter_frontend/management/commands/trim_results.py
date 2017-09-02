@@ -16,14 +16,19 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     args = '[<project id>...]'
     help = 'Trim cached scores for each project.'
-    option_list = BaseCommand.option_list + (
-        make_option('-d', '--days', type='int', action="store",
-                    dest="days", default=settings.METRIC_CACHE_LIMIT,
-                    help="Number of days of cached scores to keep"),
-        make_option('-n', '--dry-run', action="store_true",
-                    dest="dry_run", default=False,
-                    help="Dry run"),
-    )
+
+    def add_arguments(self, parser):
+        parser.add_argument('project_ids', type=int, nargs='+')
+
+        parser.add_argument('-d', '--days',
+                            type=int, action="store",
+                            dest="days", default=settings.METRIC_CACHE_LIMIT,
+                            help="Number of days of cached scores to keep")
+
+        parser.add_argument('-n', '--dry-run',
+                            action="store_true",
+                            dest="dry_run", default=False,
+                            help="Dry run")
 
     def handle(self, *project_ids, **options):
         days = options['days']
