@@ -539,7 +539,6 @@ function AnnotatedGraph (element, all_series, caption_text)
     var full_series = all_series.concat ([
         new EventMarkerSeries ("Event", event_series, "#12FF00",
                                event_labels),
-        new EventMarkerSeries ("Meeting", meeting_series, "#FFB300"),
         new EventMarkerSeries ("Release", release_series, "#E700FF",
                                release_labels),
         new EventMarkerSeries ("Blog post", blog_series, "#00A7FF",
