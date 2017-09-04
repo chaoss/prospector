@@ -10,7 +10,6 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
 from mptt.managers import TreeManager
 
-from preferences.models import Preferences
 from jsonfield.fields import JSONField
 
 import hashlib
@@ -38,14 +37,6 @@ from .metrics.constants import score_to_colour
 
 
 logger = logging.getLogger(__name__)
-
-
-class Options(Preferences):
-    class Meta:
-        verbose_name = 'Options'
-        verbose_name_plural = 'Options'
-
-    highlight_domain = models.ForeignKey(EmailDomain, null=True, default=None)
 
 
 class Project(projectmodels.Project):
@@ -514,7 +505,6 @@ __all__ = [
     'Participant',
     'EmailAddress',
     'EmailDomain',
-    'Options',
     'Project',
     'MetricScoreConstants',
     'MetricAlgorithm',

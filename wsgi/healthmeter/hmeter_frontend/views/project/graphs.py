@@ -11,8 +11,6 @@ from django.db.models import Count
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
-from preferences import preferences
-
 from healthmeter.hmeter_frontend import models
 
 from healthmeter.btinfo import models as btmodels

@@ -3,7 +3,6 @@
 
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
-from preferences.admin import PreferencesAdmin
 
 from .models import *
 from healthmeter.btinfo.models import BugNamespace
@@ -63,4 +62,3 @@ class ProjectAdmin(MPTTModelAdmin):
     list_filter = ('business_unit', 'is_wip')
 
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(Options, PreferencesAdmin)

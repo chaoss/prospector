@@ -9,7 +9,6 @@ import json
 from django.conf import settings
 from django.db.models import Count, Sum
 from django.views.generic import DetailView
-from preferences import preferences
 
 from healthmeter.hmeter_frontend import models
 from ...metrics.constants import get_score_constants
@@ -204,8 +203,7 @@ class ProjectDetail(DetailView):
     def populate_miscdata(self):
         self.data['start_date'] = self.object.smart_start_date
         self.data['end_date'] = self.object.last_updated
-        self.data['hldomain'] = getattr(preferences.Options.highlight_domain,
-                                        'domain', '')
+        self.data['hldomain'] = ''
 
     def _populate_listdata_with_count(self, basename, items):
         self.data[basename + 's'] = items

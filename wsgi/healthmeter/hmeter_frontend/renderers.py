@@ -7,7 +7,6 @@ from django.core.urlresolvers import normalize, reverse, NoReverseMatch
 from django.conf import settings
 from django.db import connection
 from django.db.utils import InterfaceError
-from preferences import preferences
 from .models import Project
 from .urls import project_urlpatterns
 from .utils.containers import filterdict
@@ -28,8 +27,7 @@ class ProjectRenderer(StaticSiteRenderer):
         default_kwargs = {'id': project_id,
                           'pk': project_id,
                           'domain': ''}
-        hldomain = getattr(preferences.Options.highlight_domain,
-                           'domain', '')
+        hldomain = ''
 
         for name, possibilities in proj_views:
             for _, keys in possibilities:
