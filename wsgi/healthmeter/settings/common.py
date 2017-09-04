@@ -134,13 +134,11 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'preferences',
     'healthmeter.projectinfo',
     'healthmeter.participantinfo',
     'healthmeter.vcsinfo',
     'healthmeter.mlinfo',
     'healthmeter.btinfo',
-    'healthmeter.gtrendsinfo',
     'healthmeter.eventinfo',
     'healthmeter.bloginfo',
     'healthmeter.hmeter_frontend',

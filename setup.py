@@ -9,33 +9,28 @@ install_requires = [
     'Django>=1.11',
     'psycopg2',
     'pillow',
-    'django-mptt',
-    'dulwich',
-    'python-hglib',
-    'python-bugzilla',
-    'iso8601',
     'beautifulsoup4',
     'python-dateutil',
-    'feedparser',
     'python-graph-core',
     'python-magic',
-    'django-colorful',
     'python-memcached',
-    'jira>=0.13',
-    'requests>=1.0',
-    'bzr',
     'jsonfield',
-    # 'django-preferences>=0.0.6.1',
     'logutils',           # required for django-medusa
     'django-load',
-    'suds',               # required for python-mantisbt-api
-    'python-redmine',
-    'launchpadlib',
     'django-compressor',
     'django-bootstrap-form',
     'django-sekizai',
-    'django-activelink',
+    'django-mptt',
+    'django-medusa',
+    'django-js-reverse',
     'twython',
+    'perceval'
+]
+
+# Hack for installing Django package before
+# some dependent packages
+setup_requires = [
+    'django-colorful',
 ]
 
 if not os.getenv('OPENSHIFT_APP_NAME'):
