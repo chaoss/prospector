@@ -284,8 +284,6 @@ class Metric(MPTTModel):
 
     time_based = models.BooleanField(default=True)
 
-    tree = TreeManager()
-
     class MPTTMeta:
         ordering = ('tree_id', 'level', 'sibling_order')
         order_insertion_by = ('sibling_order')
