@@ -37,14 +37,12 @@ Configuration is done via auto-generated `django.contrib.admin` applications.
 ### Django ORM models ###
 The database models are distributed among the Django apps by function.
 
-- `btinfo`: Bug tracker metadata + imported information
-- `cveinfo`: CPE metadata + imported CVE information
-- `gtrendsinfo`: Google Trends queries + datapoints
-- `jamiqinfo`: JamiQ topics + datapoints
-- `mlinfo`: Mailing list metadata + imported information
+- `bloginfo`: Blog tracker metadata + imported information (RSS)
+- `btinfo`: Bug tracker metadata + imported information (Bugzilla, GitHub, JIRA, Redmine)
+- `mlinfo`: Mailing list metadata + imported information (HTTP, Pipermail, NNTP)
 - `participantinfo`: Participant/Contributor imported information
 - `projectinfo`: Metadata on basic projects
-- `vcsinfo`: VCS repository information
+- `vcsinfo`: VCS repository information (Git)
 - `hmeter_frontend`: Aggregated information linking the models from individual
   projects and their respective resources from the `*info` apps.
 
@@ -88,4 +86,3 @@ calculation.
 The importers are implemented in `*.importers.`, with corresponding management
 commands defined in `*.management.commands.update_*` for easy shell-based
 invocation.
-
