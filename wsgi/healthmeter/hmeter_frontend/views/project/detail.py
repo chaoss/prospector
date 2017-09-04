@@ -43,8 +43,8 @@ class ProjectDetail(DetailView):
 
     @cached_property
     def bug_namespaces(self):
-        return self.object.all_bug_trackers \
-                          .select_related('bug_tracker__bt_type__name')
+        return self.object.all_bug_trackers.all() \
+                          #.prefetch_related('bug_tracker__bt_type__name')
 
     @cached_property
     def bugs(self):

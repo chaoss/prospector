@@ -21,7 +21,7 @@ class Type(models.Model):
 
 class BugTracker(models.Model):
     baseurl = models.URLField(max_length=255, unique=True)
-    bt_type = models.ForeignKey(Type)
+    bt_type = models.ForeignKey(Type, related_name="types")
 
     username = models.CharField(max_length=255, null=True, blank=True)
     password = PlaintextPasswordField(max_length=255, null=True, blank=True)
@@ -50,8 +50,8 @@ class BugNamespace(models.Model):
     objects = get_natural_key_manager('product', 'component', 'bug_tracker')
 
     def __str__(self):
-        return u'(%s, %s) on %s' % (self.product, self.component,
-                                    self.bug_tracker)
+        return '(%s, %s) on %s' % (self.product, self.component,
+                                   self.bug_tracker)
 
     class Meta:
         unique_together = ('product', 'component', 'bug_tracker')

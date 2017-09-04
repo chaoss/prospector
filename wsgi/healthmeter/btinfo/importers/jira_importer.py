@@ -1,13 +1,12 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-from django.db import IntegrityError, transaction
-import iso8601
-from jira.client import JIRA
-from jira.exceptions import JIRAError
 import logging
 
-from healthmeter.btinfo.models import Severity
+from django.db import transaction
+
+from grimoirelab.toolkit.datetime import str_to_datetime
+from perceval.backends.core.jira import Jira
 
 from .common import BugTrackerImporter
 from healthmeter.hmeter_frontend.utils import get_participant
@@ -28,25 +27,9 @@ class JIRAImporter(BugTrackerImporter):
     def __init__(self, bt_info):
         super().__init__(bt_info)
 
-        options = {'server': bt_info.bug_tracker.baseurl,
-                   'verify': False}
-
-        username = bt_info.bug_tracker.username
-        password = bt_info.bug_tracker.password
-
-        basic_auth = (username, password) if username and password else None
-
-        self.jira = JIRA(options=options, basic_auth=basic_auth)
-
-    @staticmethod
-    def _parse_timestamp(timestamp):
-        timestamp = iso8601.parse_date(timestamp)
-        if timestamp.tzinfo is not None:
-            timestamp = timestamp \
-                .astimezone(iso8601.iso8601.UTC) \
-                .replace(tzinfo=None)
-
-        return timestamp
+        self.backend = Jira(bt_info.bug_tracker.baseurl,
+                            user=bt_info.bug_tracker.username,
+                            password=bt_info.bug_tracker.password)
 
     def _import_comment(self, bug, comment_id, author, timestamp):
         """
@@ -59,9 +42,12 @@ class JIRAImporter(BugTrackerImporter):
 
         @returns True if comment was created, otherwise false
         """
-        timestamp = JIRAImporter._parse_timestamp(timestamp)
+        timestamp = str_to_datetime(timestamp)
 
-        author = get_participant(author.displayName, author.emailAddress)
+        name = author['displayName']
+        email = author.get('emailAddress', None)
+
+        author = get_participant(name, email)
 
         _, created = bug.comments.get_or_create(
             comment_id=comment_id,
@@ -75,70 +61,45 @@ class JIRAImporter(BugTrackerImporter):
         return created
 
     def iter_bugs(self):
-        query = ('project="{0}"'.format(self.object.product)
-                 if self.object.product else '')
-        if self.object.component:
-            query += 'and component="{0}"'.format(self.object.component)
+        issues = self.backend.fetch()
 
-        query += ' order by created asc'
-
-        offset = 0
-        limit = None
-        while limit is None or offset < limit:
-            tries = 5
-            issues = None
-            while issues is None:
-                try:
-                    issues = self.jira.search_issues(query, startAt=offset,
-                                                     maxResults=500)
-                except JIRAError as e:
-                    tries -= 1
-
-                    logger.warning("Caught JIRAError while querying at offset "
-                                   "[%s]. Tries remaining=%s",
-                                   offset, tries,
-                                   exc_info=True)
-
-                    if not tries:
-                        raise
-
-            limit = issues.total
-
-            for issue in issues:
-                yield issue
-
-            offset += len(issues)
+        for issue in issues:
+            yield issue
 
     def _run(self):
-        for issue in self.iter_bugs():
-            try:
-                close_date = self._parse_timestamp(issue.fields.resolutiondate)
-            except iso8601.ParseError:
+        for bug in self.iter_bugs():
+            issue = bug['data']
+            cl_date = issue['fields']['resolutiondate']
+
+            if cl_date:
+                close_date = str_to_datetime(cl_date)
+            else:
                 close_date = None
 
             try:
-                with transaction.commit_on_success():
+                with transaction.atomic():
                     bug, created = self.object.bugs.get_or_create(
-                        bug_id=issue.key,
+                        bug_id=issue['key'],
                         defaults={'close_date': close_date})
 
                     logger.info("%s bug [%s]",
                                 "Imported" if created else "Found",
-                                issue.key)
+                                issue['key'])
 
                     # Create first comment, since that seems to be merged into
                     # the issue
                     if created:
                         self._import_comment(bug, 'VIRTUAL-1',
-                                             issue.fields.reporter,
-                                             issue.fields.created)
+                                             issue['fields']['reporter'],
+                                             issue['fields']['created'])
 
                     # We didn't import a new bug, so set the .close_date
                     else:
                         bug.close_date = close_date
                         bug.save()
 
-                    comments = self.jira.comments(issue)
+                    # TODO: comments not supported yet
+                    comments = []
 
                     for comment in comments:
                         created_comment = self._import_comment(bug, comment.id,

@@ -1,14 +1,16 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-import dateutil.parser as dparser
-from django.db import transaction
 import logging
-import redmine
-from redmine.exceptions import ResourceAttrError, ResourceNotFoundError
+
+from django.db import transaction
+
+from grimoirelab.toolkit.datetime import str_to_datetime
+from perceval.backends.core.redmine import Redmine
 
 from healthmeter.hmeter_frontend.utils import cached_property, get_participant
 from .common import BugTrackerImporter
+
 
 logger = logging.getLogger(__name__)
 
@@ -17,10 +19,7 @@ def getresource(resource, resname, default=None):
     """
     Helper getattr()-like function that handles ResourceAttrError as well
     """
-    try:
-        return getattr(resource, resname, default)
-    except ResourceAttrError:
-        return default
+    return resource.get(resname, default)
 
 
 class RedmineImporter(BugTrackerImporter):
@@ -36,20 +35,13 @@ class RedmineImporter(BugTrackerImporter):
         super().__init__(bt_info)
 
         bt = bt_info.bug_tracker
-        self.client = redmine.Redmine(bt.baseurl,
-                                      username=bt.username,
-                                      password=bt.password)
+        self.backend = Redmine(bt.baseurl)
         self.usercache = {}
 
     def getuser(self, rmuser):
         try:
-            return self.usercache[rmuser.id]
+            return self.usercache[rmuser['id']]
         except (KeyError, AttributeError):  # Sometimes rmuser is None
-            try:
-                rmuser = rmuser.refresh()
-            except ResourceNotFoundError:
-                rmuser = None
-
             name = ' '.join([
                 getresource(rmuser, 'firstname', ''),
                 getresource(rmuser, 'lastname', '')])
@@ -57,16 +49,16 @@ class RedmineImporter(BugTrackerImporter):
 
             user = get_participant(name, email)
 
-            if rmuser is not None:
-                self.usercache[rmuser.id] = user
+            if rmuser:
+                self.usercache[rmuser['id']] = user
 
             return user
 
     def journal_is_closing_entry(self, journal):
         return any(detail['property'] == 'attr' and
                    detail['name'] == 'status_id' and
-                   int(detail['new_value']) in self.closed_status_ids
-                   for detail in journal.details)
+                   int(detail['new_value']) in [2] # CLOSED
+                   for detail in journal['details'])
 
     @cached_property
     def closed_status_ids(self):
@@ -75,53 +67,48 @@ class RedmineImporter(BugTrackerImporter):
 
     @transaction.atomic
     def _run(self):
-        if self.object.product:
-            projects = [self.client.project.get(self.object.product)]
-        else:
-            projects = self.client.project.all()
+        issues = self.backend.fetch()
 
-        for project in projects:
-            for issue in self.client.issue.all(status_id='*',
-                                               project_id=project.id):
-                severity = self.translate_severity(issue.priority.name)
-                bug, created = self.object.bugs.get_or_create(
-                    bug_id=issue.internal_id,
-                    defaults={
-                        'severity': self.translate_severity(
-                            issue.priority.name)})
+        for issue in issues:
+            data = issue['data']
 
-                logger.info("%s bug [%s]",
-                            "Created" if created else "Found", bug)
+            severity = self.translate_severity(data['priority']['name'])
 
-                if not created:
-                    bug.severity = severity
-                    bug.save()
+            bug, created = self.object.bugs.get_or_create(bug_id=data['id'],
+                                                          defaults={'severity': severity})
 
-                else:
-                    logger.info("Saving initial comment for [%s]", bug)
-                    bug.comments.create(
-                        comment_id='VIRTUAL-1',
-                        author=self.getuser(issue.author),
-                        timestamp=issue.created_on.replace(tzinfo=None))
+            logger.info("%s bug [%s]",
+                        "Created" if created else "Found", bug)
 
-                last_closed_time = None
+            if not created:
+                bug.severity = severity
+                bug.save()
+            else:
+                logger.info("Saving initial comment for [%s]", bug)
+                bug.comments.create(
+                    comment_id='VIRTUAL-1',
+                    author=self.getuser(data['author_data']),
+                    timestamp=str_to_datetime(data['created_on'])
+                )
 
-                for journal in issue.journals:
-                    journal_time = journal.created_on.replace(tzinfo=None)
-                    comment, created = bug.comments.get_or_create(
-                        comment_id=journal.id,
-                        author=self.getuser(journal.user),
-                        timestamp=journal_time)
+            last_closed_time = None
 
-                    logger.info("%s comment [%s]",
-                                "Created" if created else "Found", comment)
+            for journal in data['journals']:
+                journal_time = str_to_datetime(journal['created_on'])
+                comment, created = bug.comments.get_or_create(
+                    comment_id=journal['id'],
+                    author=self.getuser(journal['user_data']),
+                    timestamp=journal_time)
 
-                    if self.journal_is_closing_entry(journal):
-                        last_closed_time = journal_time
+                logger.info("%s comment [%s]",
+                            "Created" if created else "Found", comment)
 
-                if last_closed_time is not None:
-                    bug.close_date = last_closed_time
-                    bug.save()
+                if self.journal_is_closing_entry(journal):
+                    last_closed_time = journal_time
+
+            if last_closed_time is not None:
+                bug.close_date = last_closed_time
+                bug.save()
 
 
 BugTrackerImporter.register_importer('redmine', RedmineImporter)
