@@ -12,9 +12,7 @@ PROJECT_DIR = os.path.realpath(
 
 _libdir = os.path.realpath(os.path.join(PROJECT_DIR, '..', '..', 'libs'))
 
-for _i in ('', 'django-dag-cte', 'google-trends-csv-downloader',
-           'django-preferences', 'django-js-reverse', 'django-medusa',
-           'python-mantisbt-api'):
+for _i in ('', 'django-activelink'):
     sys.path.insert(0, os.path.join(_libdir, _i))
 
 DEBUG = True
