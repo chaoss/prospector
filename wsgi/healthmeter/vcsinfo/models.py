@@ -1,8 +1,7 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-from django.db import models, IntegrityError, transaction
-from django_dag import models as dagmodels
+from django.db import models
 from mptt.models import TreeForeignKey
 
 from healthmeter.participantinfo.models import Participant
@@ -48,7 +47,7 @@ class Committer(models.Model):
         return self.userid
 
 
-class Commit(dagmodels.node_factory('CommitEdge')):
+class Commit(models.Model):
     repository = models.ForeignKey(Repository, related_name='commits')
     commit_id = models.CharField(max_length=255)
     author = models.ForeignKey(Committer, related_name='commits')
@@ -64,30 +63,3 @@ class Commit(dagmodels.node_factory('CommitEdge')):
 
     def __str__(self):
         return '{0} on {1}'.format(self.commit_id, self.repository)
-
-
-class CommitEdge(dagmodels.edge_factory('Commit', concrete=False)):
-    pass
-
-
-class Branch(models.Model):
-    latest_commit = models.ForeignKey(Commit, related_name='branches')
-    repository = models.ForeignKey(Repository, related_name='branches')
-    name = models.CharField(max_length=255)
-    is_main = models.BooleanField(default=False)
-
-    class Meta:
-        unique_together = ('name', 'repository')
-
-    @transaction.atomic
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if Branch.objects \
-                .filter(name=self.name,
-                        latest_commit__repository=self.repository) \
-                .exclude(id=self.id) \
-                .exists():
-            raise IntegrityError("Branch called {0} already exists for {1}")
-
-    def __str__(self):
-        return '{0} on {1}'.format(self.name, self.repository)

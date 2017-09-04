@@ -25,11 +25,6 @@ class VCSMetric(LastUpdatedChecker, TimeBasedMetric):
         qs = vcsmodels.Commit.objects.filter(repository__in=self.repositories)
         return self.clamp_timestamp(qs, 'timestamp')
 
-    @property
-    def branches(self):
-        return vcsmodels.Branch.objects \
-            .filter(latest_commit__repository__in=self.repositories)
-
 
 @metric
 class CommitterDemographic(PercentageMetric, VCSMetric):

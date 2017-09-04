@@ -101,11 +101,10 @@ class ProjectDetail(DetailView):
             lambda limit: (commits.filter(timestamp__gte=limit)
                            .distinct('author').count()))
 
-        head_commits = commits.filter(branches__is_main=True)
+        head_commits = commits.filter()
         current_sloc = (head_commits.aggregate(sloc=Sum('line_count'))['sloc']
                         or 0)
-        ancestors_lists = [[c.id for c in h.get_ancestors()]
-                           for h in head_commits]
+        ancestors_lists = []
         sloc_count_period = self.data['sloc_count_period'] = []
         for months, limit in self.limits:
             total_sloc_at_limit = 0

@@ -3,4 +3,4 @@
 
 import os
 from .common import VcsImporter
-from . import git_importer, hg_importer, svn_importer, bzr_importer
+from . import git_importer

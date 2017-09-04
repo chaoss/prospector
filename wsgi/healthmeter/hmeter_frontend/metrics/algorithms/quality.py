@@ -17,29 +17,7 @@ from .bugs import BugReportMetric
 class SlocMetric(VCSMetric):
     @property
     def sloc(self):
-        main_branches = self.branches.filter(is_main=True)
-        head_commits = vcsmodels.Commit.objects \
-                                       .filter(branches__in=main_branches)
-
-        sloc = 0
-
-        for commit in head_commits:
-            try:
-                commit_ids = itertools.chain(
-                    (c.id for c in commit.get_ancestors()),
-                    [commit.id])
-                commits = vcsmodels.Commit.objects.filter(id__in=commit_ids)
-
-                if self.end:
-                    commits = commits.filter(timestamp__lte=self.end)
-
-                latest = commits.latest('timestamp')
-            except vcsmodels.Commit.DoesNotExist:
-                latest = commit
-
-            sloc += latest.line_count
-
-        return sloc
+        return 0
 
 
 @metric

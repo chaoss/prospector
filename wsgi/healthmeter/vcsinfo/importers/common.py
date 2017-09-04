@@ -3,14 +3,17 @@
 
 """Common functions for vcs importers"""
 
-import re
 import os
+import re
+import sys
+
+import magic
+
 from django.db import DatabaseError, transaction
 from healthmeter.importerutils.importers import ImporterBase
 from healthmeter.hmeter_frontend.utils import get_participant, coerce_unicode
 from healthmeter.vcsinfo.models import Repository
-import magic
-import sys
+
 
 _magic = magic.Magic(mime_encoding=True)
 
@@ -32,17 +35,15 @@ class VcsImporter(ImporterBase):
         path = os.path.join(os.getenv('OPENSHIFT_DATA_DIR',
                                       os.getenv('TMPDIR', '/tmp')),
                             'vcs-checkouts', str(self.object.pk))
-
-        if not os.path.isdir(path):
-            os.makedirs(path)
-
         return path
 
-    userid_regexes = map(re.compile,
-                         (r'(?P<name>[^<]+) +<(?P<email>[^>]+)>',
-                          r'<(?P<email>[^>]+)>',
-                          r'(?P<email>.*@.*)',
-                          r'(?P<name>.*)'))
+    userid_regexes = [
+        re.compile(regex)
+        for regex in (r'(?P<name>[^<]+) +<(?P<email>[^>]+)>',
+                      r'<(?P<email>[^>]+)>',
+                      r'(?P<email>.*@.*)',
+                      r'(?P<name>.*)')
+    ]
 
     @classmethod
     def parseaddr(cls, userid):
