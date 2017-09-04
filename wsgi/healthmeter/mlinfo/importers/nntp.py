@@ -1,12 +1,16 @@
 # Copyright 2017 Red Hat, Inc.
 # License: GPLv3 or any later version
 
-import nntplib
 import re
 import urllib.parse
-from email.parser import HeaderParser
+import logging
+
+from perceval.backends.core.nntp import NNTP
 
 from .importer import MailImporter, Message
+
+
+logger = logging.getLogger(__name__)
 
 
 class NntpImporter(MailImporter):
@@ -28,10 +32,7 @@ class NntpImporter(MailImporter):
         """
         super().__init__(mailing_list)
         self._parse_url()
-
-        self.nntp = nntplib.NNTP(self.server, self.port,
-                                 self.username, self.password,
-                                 readermode=True)
+        self.backend = NNTP(self.server, self.group)
 
     def _parse_url(self):
         """
@@ -51,33 +52,28 @@ class NntpImporter(MailImporter):
         self.server = url.hostname
         self.port = url.port if url.port else 119
 
-    def close(self):
-        """ Quit the NNTP connection"""
-        self.nntp.quit()
-
     def get_messages(self):
         """
         Iterate through all messages in the NNTP group
         """
-        (resp, article_count,
-         first_article, last_article, _) = self.nntp.group(self.group)
+        articles = self.backend.fetch()
 
-        try:
-            article_id = first_article
-            while True:
-                msg = HeaderParser().parsestr(
-                    "\r\n".join(self.nntp.head(article_id)[3]))
+        for article in articles:
+            data = article['data']
+            data['Message-ID'] = self.gmane_mangler_regex.sub('', data['Message-ID'])
 
-                msg['Message-Id'] = self.gmane_mangler_regex.sub(
-                    '', msg['Message-Id'])
+            try:
+                msg = Message(data['From'], data['Date'], data['Subject'],
+                              data['Message-ID'], data['References'])
+            except:
+                logger.warning('Malformed message found, skipping:\n%s', article['updated_on'],
+                               exc_info=True)
+                msg = None
 
-                yield Message(msg['From'], msg['Date'], msg['Subject'],
-                              msg['Message-Id'], msg['References'])
+            # yield outside the try block to avoid capturing exceptions
+            # that should terminate the loop instead
+            if msg is not None:
+                yield msg
 
-                _, article_id, _ = self.nntp.next()
-
-        except nntplib.NNTPTemporaryError as e:
-            if e.message != '421 No next article to retrieve':
-                raise
 
 MailImporter.register_importer('nntp', NntpImporter)

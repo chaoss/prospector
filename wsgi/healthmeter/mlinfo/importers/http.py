@@ -2,16 +2,11 @@
 # License: GPLv3 or any later version
 
 import logging
-import os
 import re
-import shutil
-import urllib.parse
-import urllib.request
 
-from healthmeter.hmeter_frontend.utils import (get_decompressed_fileobj,
-                                               LinkScraper)
+from perceval.backends.core.pipermail import Pipermail
 
-from .importer import MailImporter, Message
+from .importer import MailImporter
 from .common import get_mailing_list_path
 from .mbox import MBoxImporter
 
@@ -24,7 +19,6 @@ class HttpImporter(MBoxImporter):
     given URL, downloads them, and hooks up to MBoxImporter to import posts
     into the database.
     """
-
     url = ''
     username = None
     password = None
@@ -46,61 +40,14 @@ class HttpImporter(MBoxImporter):
         @arg password       Password to use when requesting url. Will be
                             encoded into POST data as `password'
         """
+        super().__init__(mailing_list)
         self.username = username
         self.password = password
 
         self.mailing_list_path = get_mailing_list_path(mailing_list)
 
-        scraper = LinkScraper(mailing_list.archive_url, self.patterns, 0)
-        mbox_paths = self.download_mboxes(self.mailing_list_path,
-                                          scraper.get_links())
-
-        super(HttpImporter, self).__init__(mailing_list, mbox_paths)
-
-    def download_mboxes(self, save_path, mbox_links):
-        """
-        Download all mboxes in mbox_links into save_path
-
-        @arg save_path Path to save mboxes into
-        @arg mbox_links List of mbox URLs to download
-        @return List of downloaded mboxes corresponding to mbox_links
-        """
-
-        if self.username:
-            postdata = urllib.parse.urlencode({'username': self.username,
-                                               'password': self.password})
-
-        else:
-            postdata = None
-
-        mbox_paths = []
-        for link in mbox_links:
-            # Handle mod_mbox links and strip away /thread to get raw mbox
-            if link.endswith('/thread'):
-                logger.info("Detected mod_mbox link. Stripping /thread")
-                link = link[:-len('/thread')]
-
-            logger.info("Downloading [%s]", link)
-            try:
-                request = urllib.request.Request(link, postdata)
-                response = urllib.request.urlopen(request)
-
-                filename = os.path.basename(link)
-                mbox_path = os.path.join(save_path, filename)
-
-                decompressed_response = get_decompressed_fileobj(response)
-
-                with open(mbox_path, 'w') as outf:
-                    shutil.copyfileobj(decompressed_response, outf)
-
-                mbox_paths.append(mbox_path)
-
-            except:
-                logger.warning("Could not download [%s]. Skipping...",
-                               link,
-                               exc_info=True)
-
-        return mbox_paths
+        self.backend = Pipermail(mailing_list.archive_url,
+                                 self.mailing_list_path)
 
 MailImporter.register_importer('http', HttpImporter)
 MailImporter.register_importer('https', HttpImporter)
