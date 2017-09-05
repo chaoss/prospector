@@ -16,7 +16,6 @@ install_requires = [
     'python-memcached',
     'jsonfield',
     'logutils',           # required for django-medusa
-    'django-load',
     'django-compressor',
     'django-bootstrap-form',
     'django-sekizai',
