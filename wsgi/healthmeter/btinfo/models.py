@@ -25,6 +25,7 @@ class BugTracker(models.Model):
 
     username = models.CharField(max_length=255, null=True, blank=True)
     password = PlaintextPasswordField(max_length=255, null=True, blank=True)
+    api_token = PlaintextPasswordField(max_length=255, null=True, blank=True)
 
     objects = get_natural_key_manager('baseurl')
 

@@ -27,6 +27,7 @@ class GithubImporter(BugTrackerImporter):
         owner = bt_info.bug_tracker.baseurl.replace('http://github.com/', '')
         self.backend = GitHub(owner=owner,
                               repository=self.object.product,
+                              api_token=bt_info.bug_tracker.api_token,
                               sleep_for_rate=True)
 
     def get_user(self, userdata):
