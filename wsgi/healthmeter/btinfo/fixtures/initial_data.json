@@ -21,52 +21,10 @@
     }
 },
 {
-    "pk": 4, 
-    "model": "btinfo.type", 
-    "fields": {
-        "name": "launchpad"
-    }
-},
-{
     "pk": 5, 
     "model": "btinfo.type", 
     "fields": {
         "name": "redmine"
-    }
-},
-{
-    "pk": 6, 
-    "model": "btinfo.type", 
-    "fields": {
-        "name": "sf"
-    }
-},
-{
-    "pk": 7, 
-    "model": "btinfo.type", 
-    "fields": {
-        "name": "debbugs"
-    }
-},
-{
-    "pk": 8, 
-    "model": "btinfo.type", 
-    "fields": {
-        "name": "trac"
-    }
-},
-{
-    "pk": 9, 
-    "model": "btinfo.type", 
-    "fields": {
-        "name": "phpbts"
-    }
-},
-{
-    "pk": 10, 
-    "model": "btinfo.type", 
-    "fields": {
-        "name": "mantis"
     }
 },
 {
