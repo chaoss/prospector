@@ -10,6 +10,6 @@ if ON_OPENSHIFT:
     from .openshift import *
 
 try:
-    from .local import *
+    from .dev import *
 except ImportError:
     pass
