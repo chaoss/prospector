@@ -29,30 +29,6 @@
     </p>
   </section>
 
-  <!--
-  <section>
-    <h1>Help</h1>
-    Here are some screencasts done by a contributor, Henry Tang
-    &lt;{{ "htang@redhat.com"|urlize}}&gt;.
-
-    <div class="container">
-      <figure class="col-sm-6">
-        <video controls="controls" width="600" height="352">
-          <source src="{% static 'screencasts/login.webm' %}">
-        </video>
-        <figcaption>Login process</figcaption>
-      </figure>
-
-      <figure class="col-sm-6">
-        <video controls="controls" width="600" height="352">
-          <source src="{% static 'screencasts/process.webm' %}">
-        </video>
-        <figcaption>Configuring a project</figcaption>
-      </figure>
-    </div>
-  </section>
-  -->
-
   <section>
     <h1>Attributions</h1>
 
@@ -111,110 +87,34 @@
         </p>
       </dd>
 
-      <dt><a href="http://www.jamiq.com">JamiQ</a></dt>
+      <dt><a href="http://grimoirelab.github.io">Grimoire Lab</a></dt>
       <dd>
         <p>
-          A social media monitoring service. It helps business listen,
-          measure, and gain insights from conversations taking place online.
-          JamiQ's unique solution provides the widest coverage of the
-          Asia-Pacific's diverse and multilingual social media. JamiQ uses
-          advanced data mining and natural language processing technology to
-          produce real-time buzz trending, sentiment detection, influence
-          scoring, and market segmentation, giving you the critical insights
-          businesses need for immediate and strategic decision-making.
+          GrimoireLab is free, open source software for software development
+          analytics. It allows you to retrieve data from many kinds of systems
+          with information related to software development, and produce analysis
+          and visualizations with it.
         </p>
 
         <p>
-          Further explanation of JamiQ's technology can be found in
-          <a href="{% static 'jamiq-technology-explained.pdf' %}">
-            this document</a>.
-        </p>
+          GrimoireLab supports more than 20 different kinds of data sources,
+          from git reposiories or GitHub projects, to issue trackers such as
+          Jira or Bugzilla, including messaging systems such as IRC, Slack or
+          mailing lists, or other types of systems such as StackOverflow or
+          Jenkins.
+       </p>
 
-        <p>
-          The Open Source Prospector project utilizes this service for deriving
-          statistics on sentiment-analyzed posts online. This data is used as
-          Open Source Prospector's primary publicity metric.
-        </p>
+       <p>
+         With the tools in the GrimoireLab toolset you can retrieve data,
+         store it in databases, analyze it, and produce nice dashboards
+         for interactively visualizing the resulting information.
+       </p>
+
+       <p>
+         Prospector uses Perceval, a package part of Grimoire Lab, to fetch
+         data from open source repositories.
+       </p>
       </dd>
-
-      <dt>
-        <a href="https://github.com/hyperair/django-dag">
-          Django DAG CTE
-        </a>
-      </dt>
-      <dd>
-        <p>
-          A Django app meant to ease the storage and querying of directed
-          acyclic graphs in PostgreSQL databases, with optimizations for
-          common DAG queries using PostgreSQL's Common Table Expressions. It
-          was forked from
-          <a href="https://github.com/elpaso/django-dag">Django DAG</a>.
-        </p>
-
-        <p>
-          The Open Source Prospector project uses this module for the storage and
-          querying of commit graphs.
-        </p>
-      </dd>
-
-      <dt>
-        <a href="https://www.samba.org/~jelmer/dulwich/">Dulwich</a>
-      </dt>
-      <dd>
-        <p>
-          Dulwich is a pure-Python implementation of the Git file formats and
-          protocols. The project is named after the village in which Mr. and
-          Mrs. Git live in the Monty Python sketch. Dulwich has been tested on
-          CPython 2.X where X >= 4 and on recent versions of pypy.
-        </p>
-
-        <p>
-          The Open Source Prospector project uses this library for importing
-          data from git repositories into its database, which are later
-          distilled into useful commit statistics that contibute to the health
-          score of a
-          project.
-        </p>
-      </dd>
-
-      <dt>
-        <a href="https://fedorahosted.org/python-bugzilla/">
-          Python Bugzilla
-        </a>
-      </dt>
-      <dd>
-        <p>
-          A Python library that provides a nice, python-ish interface to
-          Bugzilla over XMLRPC. It was original written specifically for Red
-          Hat's Bugzilla instance, but has since sprouted an abstraction layer
-          that allows it to be used with almost any Bugzilla instance.
-        </p>
-
-        <p>
-          The Open Source Prospector project uses this library for importing
-          data from Bugzilla bug databases into its database, which are later
-          distilled into useful bug statistics that contribute ot the health
-          score of a project.
-        </p>
-      </dd>
-
-      <dt>
-        <a href="http://jira-python.readthedocs.org/en/latest/">
-          jira-python
-        </a>
-      </dt>
-      <dd>
-        <p>
-          A Python library designed to ease the use of the JIRA REST API. Some
-          basic support for the GreenHopper REST API also exists.
-        </p>
-
-        <p>
-          The Open Source Prospector project uses this library for importing
-          data from the JIRA bug tracker.
-        </p>
-      </dd>
-    </dl>
 
   </section>
 {% endblock %}
