@@ -24,7 +24,16 @@ class GithubImporter(BugTrackerImporter):
 
     def __init__(self, bt_info):
         super().__init__(bt_info)
-        owner = bt_info.bug_tracker.baseurl.replace('http://github.com/', '')
+
+        url = bt_info.bug_tracker.baseurl
+
+        if url.startswith('https://github.com/'):
+            owner = url.replace('https://github.com/', '')
+        elif url.startswith('http://github.com/'):
+            owner = url.replace('http://github.com/', '')
+        else:
+            owner = url
+
         self.backend = GitHub(owner=owner,
                               repository=self.object.product,
                               api_token=bt_info.bug_tracker.api_token,
