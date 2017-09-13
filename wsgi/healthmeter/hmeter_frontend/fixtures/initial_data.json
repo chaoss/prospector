@@ -73,38 +73,6 @@
    },
    {
       "fields" : {
-         "desc" : "Number of IRC channels",
-         "name" : "IrcChannelsNumber"
-      },
-      "pk" : 7,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "Frequency of IRC meetings",
-         "name" : "IrcMeetingFrequency"
-      },
-      "pk" : 8,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "Average lines per IRC meeting",
-         "name" : "IrcMeetingAverageLines"
-      },
-      "pk" : 9,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "Average participants per IRC meeting",
-         "name" : "IrcMeetingAverageParticipants"
-      },
-      "pk" : 10,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
          "desc" : "Unique email address domains among committers",
          "name" : "CommitterUniqueDomains"
       },
@@ -165,14 +133,6 @@
          "name" : "EventMaxInterval"
       },
       "pk" : 18,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "Has IRC Channels",
-         "name" : "HasIrcChannels"
-      },
-      "pk" : 19,
       "model" : "hmeter_frontend.metricalgorithm"
    },
    {
@@ -301,30 +261,6 @@
          "name" : "CommitterCount"
       },
       "pk" : 36,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "Ratio of CVEs opened to CVEs closed",
-         "name" : "CVEsClosedRatio"
-      },
-      "pk" : 37,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "",
-         "name" : "JamiqAveragePostSentiment"
-      },
-      "pk" : 38,
-      "model" : "hmeter_frontend.metricalgorithm"
-   },
-   {
-      "fields" : {
-         "desc" : "",
-         "name" : "JamiqPositivePostsTrend"
-      },
-      "pk" : 39,
       "model" : "hmeter_frontend.metricalgorithm"
    }
 ]

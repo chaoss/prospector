@@ -77,25 +77,6 @@
    },
    {
       "fields" : {
-         "template_name" : "irc-events",
-         "algorithm" : null,
-         "parent" : 27,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Frequency of IRC conversations and the participation rates",
-         "rght" : 114,
-         "tree_id" : 1,
-         "sibling_order" : 7,
-         "level" : 2,
-         "lft" : 99,
-         "weight" : 10,
-         "title" : "IRC Activity"
-      },
-      "pk" : 5,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
          "template_name" : "blogs-activity",
          "algorithm" : null,
          "parent" : 27,
@@ -206,25 +187,6 @@
          "title" : "Publicity"
       },
       "pk" : 29,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
-         "algorithm" : 19,
-         "parent" : 26,
-         "colour" : "",
-         "time_based" : false,
-         "description" : "Rationale: Chat support from other project contributors.",
-         "rght" : 16,
-         "tree_id" : 1,
-         "sibling_order" : 7,
-         "level" : 2,
-         "lft" : 15,
-         "weight" : 10,
-         "title" : "Does it have IRC channels?"
-      },
-      "pk" : 30,
       "model" : "hmeter_frontend.metric"
    },
    {
@@ -515,82 +477,6 @@
    {
       "fields" : {
          "template_name" : "",
-         "algorithm" : 7,
-         "parent" : 5,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: Different IRC channels indicate a varied grouping of interest and is preferred.",
-         "rght" : 107,
-         "tree_id" : 1,
-         "sibling_order" : 1,
-         "level" : 3,
-         "lft" : 106,
-         "weight" : 20,
-         "title" : "Number of IRC channels"
-      },
-      "pk" : 46,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
-         "algorithm" : 8,
-         "parent" : 5,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: Weekly IRC meetings are good.",
-         "rght" : 109,
-         "tree_id" : 1,
-         "sibling_order" : 2,
-         "level" : 3,
-         "lft" : 108,
-         "weight" : 30,
-         "title" : "Number of IRC meetings per month"
-      },
-      "pk" : 47,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
-         "algorithm" : 9,
-         "parent" : 5,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: Lines of IRC chat indicate engagement.",
-         "rght" : 111,
-         "tree_id" : 1,
-         "sibling_order" : 3,
-         "level" : 3,
-         "lft" : 110,
-         "weight" : 30,
-         "title" : "Number of lines per IRC session"
-      },
-      "pk" : 48,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
-         "algorithm" : 10,
-         "parent" : 5,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: More participants are good.",
-         "rght" : 113,
-         "tree_id" : 1,
-         "sibling_order" : 4,
-         "level" : 3,
-         "lft" : 112,
-         "weight" : 20,
-         "title" : "Average number of participants per IRC meeting"
-      },
-      "pk" : 49,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
          "algorithm" : 15,
          "parent" : 6,
          "colour" : "",
@@ -704,25 +590,6 @@
    },
    {
       "fields" : {
-         "template_name" : "security",
-         "algorithm" : null,
-         "parent" : 28,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Common Vulnerabilities and Exposures (https://cve.mitre.org/) is an industry accepted security vulnerability reporting benchmark",
-         "rght" : 128,
-         "tree_id" : 1,
-         "sibling_order" : 2,
-         "level" : 2,
-         "lft" : 123,
-         "weight" : 40,
-         "title" : "Security"
-      },
-      "pk" : 56,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
          "template_name" : "",
          "algorithm" : 32,
          "parent" : 55,
@@ -762,25 +629,6 @@
    {
       "fields" : {
          "template_name" : "",
-         "algorithm" : 29,
-         "parent" : 56,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: All CVEs are bugs and closure of CVEs indicate bug fix activity.",
-         "rght" : 125,
-         "tree_id" : 1,
-         "sibling_order" : 1,
-         "level" : 3,
-         "lft" : 124,
-         "weight" : 50,
-         "title" : "CVEs reported per KLOC"
-      },
-      "pk" : 59,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
          "algorithm" : null,
          "parent" : 29,
          "colour" : "",
@@ -814,25 +662,6 @@
          "title" : "Events"
       },
       "pk" : 61,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "jamiq",
-         "algorithm" : null,
-         "parent" : 29,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "",
-         "rght" : 140,
-         "tree_id" : 1,
-         "sibling_order" : 2,
-         "level" : 2,
-         "lft" : 135,
-         "weight" : 40,
-         "title" : "Social Sentiments"
-      },
-      "pk" : 63,
       "model" : "hmeter_frontend.metric"
    },
    {
@@ -933,25 +762,6 @@
    {
       "fields" : {
          "template_name" : "",
-         "algorithm" : 37,
-         "parent" : 56,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: Rapidness of CVE fix is critical for the security of the users of the project.",
-         "rght" : 127,
-         "tree_id" : 1,
-         "sibling_order" : 2,
-         "level" : 3,
-         "lft" : 126,
-         "weight" : 50,
-         "title" : "Ratio of CVEs opened to CVEs closed"
-      },
-      "pk" : 69,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
          "algorithm" : 33,
          "parent" : 67,
          "colour" : "",
@@ -966,25 +776,6 @@
          "title" : "Age of most recent release"
       },
       "pk" : 70,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
-         "algorithm" : 39,
-         "parent" : 63,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: An upward trend of posts with positive sentiments compared with posts with negative sentiments indicates a growth of satisfied users as compared to dissatisfied users, which is preferred.",
-         "rght" : 137,
-         "tree_id" : 1,
-         "sibling_order" : 1,
-         "level" : 3,
-         "lft" : 136,
-         "weight" : 40,
-         "title" : "Upward trend of posts with positive sentiment as compared with posts with negative sentiment"
-      },
-      "pk" : 72,
       "model" : "hmeter_frontend.metric"
    },
    {
@@ -1099,25 +890,6 @@
          "title" : "Downloads"
       },
       "pk" : 78,
-      "model" : "hmeter_frontend.metric"
-   },
-   {
-      "fields" : {
-         "template_name" : "",
-         "algorithm" : 38,
-         "parent" : 63,
-         "colour" : "",
-         "time_based" : true,
-         "description" : "Rationale: A positive average sentiment shows that the majority of the users publicly posting are satisfied with the product, which is desirable, and vice versa.",
-         "rght" : 139,
-         "tree_id" : 1,
-         "sibling_order" : 2,
-         "level" : 3,
-         "lft" : 138,
-         "weight" : 60,
-         "title" : "Average sentiment over 7 days from the last update"
-      },
-      "pk" : 79,
       "model" : "hmeter_frontend.metric"
    },
    {
