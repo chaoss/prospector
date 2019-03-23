@@ -1,4 +1,4 @@
-**NOTE:** *Prospector project is inactivity. The project will become active once someone starts maintaining it again.*
+**NOTE:** *Prospector project is inactive. The project will become active once someone starts maintaining it again.*
 
 Prospector
 
