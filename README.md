@@ -1,3 +1,5 @@
+**NOTE:** *Prospector project is inactivity. The project will become active once someone starts maintaining it again.*
+
 Prospector
 
 Prospector permits automated collection of a wide range of metrics of 
